@@ -1,6 +1,6 @@
 -- 회원정보 테이블
 -- 아이디, 이름, 패스워드, 회원가입일, 별명, 핸드폰번호, 성별, 생일,  이메일, 유저등급, 접속아이피, 접속일, 비밀번호 변경일, 주소
-DROP TABLE MEMBER;
+DROP TABLE if exists MEMBER;
 CREATE TABLE MEMBER
 (
     id varchar(255) NOT NULL
@@ -23,7 +23,7 @@ CREATE TABLE MEMBER
 
 -- 장소 관리 테이블
 -- PK, 지명, 우편번호, 주소, 상세주소, 도(시), 시(군, 구) GPS X, GPS Y
-DROP TABLE ADDRESS;
+DROP TABLE if exists ADDRESS;
 CREATE TABLE ADDRESS
 (
     seq integer NOT NULL
@@ -40,7 +40,7 @@ CREATE TABLE ADDRESS
 
 -- 게시물 테이블
 -- PK, 게시물제목, 작성자, 작성시간, 수정시간, 게시물내용, 작성아이피
-DROP TABLE BOARD;
+DROP TABLE if exists BOARD;
 CREATE TABLE BOARD
 (
     seq integer NOT NULL
