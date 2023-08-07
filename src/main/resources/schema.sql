@@ -45,10 +45,24 @@ CREATE TABLE BOARD
 (
     seq integer NOT NULL
     , title varchar2(255)
-    , editor integer NOT NULL
+    , editor varchar2(255) NOT NULL
     , edit_time timestamp NOT NULL
     , modify_time timestamp
     , content varchar2(255)
+    , ip varchar2(255)
+    , primary key(seq)
+);
+
+-- 게시물 댓글 테이블
+-- PK, 게시물제목, 작성자, 작성시간, 수정시간, 게시물내용, 작성아이피
+DROP TABLE if exists BOARD_COMMENT;
+CREATE TABLE BOARD_COMMENT
+(
+    seq integer NOT NULL
+    , editor varchar2(255) NOT NULL
+    , edit_time timestamp NOT NULL
+    , modify_time timestamp
+    , comment varchar2(255)
     , ip varchar2(255)
     , primary key(seq)
 );
