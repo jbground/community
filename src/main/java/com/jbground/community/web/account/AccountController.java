@@ -40,6 +40,9 @@ public class AccountController {
         return "thymeleaf/login/login";
     }
 
+    /**
+     * 회원 가입
+     */
     @RequestMapping(value = "/register")
     public String register(HttpServletRequest request, ModelMap model) throws Exception {
 
