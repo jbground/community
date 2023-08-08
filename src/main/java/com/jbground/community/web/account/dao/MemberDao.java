@@ -1,4 +1,4 @@
-package com.jbground.community.web.account;
+package com.jbground.community.web.account.dao;
 
 import com.jbground.community.model.Member;
 import org.apache.ibatis.annotations.Mapper;

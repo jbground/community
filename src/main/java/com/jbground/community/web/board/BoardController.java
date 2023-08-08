@@ -1,10 +1,9 @@
 package com.jbground.community.web.board;
 
 import com.jbground.community.model.Board;
-import com.jbground.community.web.account.AccountController;
+import com.jbground.community.web.board.dao.BoardDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +20,11 @@ public class BoardController {
     @Resource(type = BoardService.class)
     private BoardService boardService;
 
-    @Resource(type = BoardDao.class)
-    private BoardDao boardDao;
 
     @RequestMapping(value = "/board/list")
     public String showBoard(HttpServletRequest request, ModelMap model) throws Exception{
 
-        List<Board> allBoardList = boardDao.getAllBoardList();
+        List<Board> allBoardList = boardService.getAllBoardList();
 
         for (Board b : allBoardList) {
 

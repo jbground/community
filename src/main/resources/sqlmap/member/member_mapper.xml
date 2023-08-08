@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace= "com.jbground.community.web.account.MemberDao">
+<mapper namespace= "com.jbground.community.web.account.dao.MemberDao">
 
     <select id="getMembers" resultType="com.jbground.community.model.Member">
         SELECT * FROM MEMBER

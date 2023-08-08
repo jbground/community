@@ -1,4 +1,4 @@
-package com.jbground.community.web.board;
+package com.jbground.community.web.board.dao;
 
 import com.jbground.community.config.AbstractMybatisMapper;
 import com.jbground.community.model.Board;
