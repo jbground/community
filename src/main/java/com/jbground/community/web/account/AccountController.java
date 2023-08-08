@@ -1,7 +1,7 @@
 package com.jbground.community.web.account;
 
 import com.jbground.community.model.Member;
-import com.jbground.community.util.CommonUtil;
+import com.jbground.community.util.Common;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -30,12 +30,12 @@ public class AccountController {
     public String login(HttpServletRequest request, ModelMap model) throws Exception {
         List<Member> all = accountService.getMembers();
         for (Member m : all) {
-            logger.info(CommonUtil.findObjectAddress(m));
+            logger.info(Common.findObjectAddress(m));
         }
 
         List<Member> all2 = accountService.getMembers2();
         for (Member m : all2) {
-            logger.info(CommonUtil.findObjectAddress(m));
+            logger.info(Common.findObjectAddress(m));
         }
         return "thymeleaf/login/login";
     }
