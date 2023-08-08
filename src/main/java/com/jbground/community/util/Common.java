@@ -1,6 +1,6 @@
 package com.jbground.community.util;
 
-public class CommonUtil {
+public class Common {
 
     public static final String[] keyword = {"frameset", "oncut", "void", "applet", "eval", "onstop", "cookie", "style"
             , "layer", "javascript", "document", "onclick", "onactivae", "onfocusin"
