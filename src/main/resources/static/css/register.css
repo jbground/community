@@ -1,0 +1,42 @@
+@import url(../css/reset.css);
+@import url(../css/common.css);
+
+:root {
+  --register-input-color: ;
+}
+
+.subcontent {
+  background: #efefef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.wrapjoinForm {
+  width: 500px;
+  height: 800px;
+  background: #efefef;
+  border-radius: 30px;
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, 0.7),
+    -6px -6px 10px rgba(255, 255, 255, 0.5),
+    6px 6px 8px rgba(255, 255, 255, 0.075), 6px 6px 10px rgba(0, 0, 0, 0.15);
+  margin: 0 auto;
+  padding: 30px;
+  color: #444;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.wrapjoinForm dl {
+  /* display: flex; */
+  gap: 20px;
+  margin-bottom: 1.25rem;
+}
+
+.wrapjoinForm dl dt {
+  margin-bottom: 0.5rem;
+}
+.wrapjoinForm .submit {
+  text-align: right;
+}

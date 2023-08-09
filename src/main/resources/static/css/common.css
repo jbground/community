@@ -1,0 +1,22 @@
+.flex {
+  display: flex;
+}
+
+.comInput {
+  width: 100%;
+  padding: 0.4rem;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+  border: 0;
+  outline: 0;
+  border-radius: 360px;
+}
+.comInput:focus {
+  box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+  outline: none;
+}
+
+.comBtn {
+  border: 0;
+  outline: 0;
+  border-radius: 360px;
+}
