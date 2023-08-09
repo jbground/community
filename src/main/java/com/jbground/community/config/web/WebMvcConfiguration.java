@@ -16,8 +16,13 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
+import java.nio.file.Paths;
+
 @Configuration
 public class WebMvcConfiguration extends WebMvcConfigurationSupport {
+
+    //D:/jsjeong/community/src/main/resources/static - java 파일 있는 곳 절대경로
+    private String path = String.valueOf(Paths.get(System.getProperty("user.dir"), "/src/main/resources/static"));
 
 
     @Bean
@@ -27,6 +32,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
     @Bean
     public ObjectMapper objectMapper() {
+
         ObjectMapper objectMapper = new ObjectMapper();
         // no timestamp
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
@@ -51,7 +57,8 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/**/**").addResourceLocations("classpath:/static/"); //산출물 기준 경로
+        // registry.addResourceHandler("/**/**").addResourceLocations("file:" + path + "/"); //resources 절대 경로
     }
 
     @Override
