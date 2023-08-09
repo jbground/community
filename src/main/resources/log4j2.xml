@@ -12,37 +12,38 @@
         <Console name="console" target="SYSTEM_OUT">
             <PatternLayout pattern="${consoleLayout}"/>
         </Console>
+
         <!-- ALL 파일 -->
-        <RollingFile name="all" fileName="${logPath}/all_${date:yyyy}${date:MM}${date:dd}.log"
-                     filePattern="${logPath}/all_%d{yyyyMMdd}.log">
-            <PatternLayout charset="UTF-8" pattern="${fileLayout} %throwable{full}"/>
-            <Policies>
-                <SizeBasedTriggeringPolicy size="10MB" />
-                <TimeBasedTriggeringPolicy /><!-- Rotated everyday -->
-            </Policies>
-        </RollingFile>
+<!--        <RollingFile name="all" fileName="${logPath}/all_${date:yyyy}${date:MM}${date:dd}.log"-->
+<!--                     filePattern="${logPath}/all_%d{yyyyMMdd}.log">-->
+<!--            <PatternLayout charset="UTF-8" pattern="${fileLayout} %throwable{full}"/>-->
+<!--            <Policies>-->
+<!--                <SizeBasedTriggeringPolicy size="10MB" />-->
+<!--                <TimeBasedTriggeringPolicy />&lt;!&ndash; Rotated everyday &ndash;&gt;-->
+<!--            </Policies>-->
+<!--        </RollingFile>-->
 
         <!-- WARN 파일 -->
-        <RollingFile name="warn" fileName="${logPath}/warn_${date:yyyy}${date:MM}${date:dd}.log"
-                     filePattern="${logPath}/warn_%d{yyyyMMdd}.log">
-            <PatternLayout charset="UTF-8" pattern="${fileLayout} %throwable{full}" />
-            <LevelRangeFilter minLevel="WARN" maxLevel="WARN" onMatch="ACCEPT" onMismatch="DENY" />
-            <Policies>
-                <SizeBasedTriggeringPolicy size="10MB" />
-                <TimeBasedTriggeringPolicy />
-            </Policies>
-        </RollingFile>
+<!--        <RollingFile name="warn" fileName="${logPath}/warn_${date:yyyy}${date:MM}${date:dd}.log"-->
+<!--                     filePattern="${logPath}/warn_%d{yyyyMMdd}.log">-->
+<!--            <PatternLayout charset="UTF-8" pattern="${fileLayout} %throwable{full}" />-->
+<!--            <LevelRangeFilter minLevel="WARN" maxLevel="WARN" onMatch="ACCEPT" onMismatch="DENY" />-->
+<!--            <Policies>-->
+<!--                <SizeBasedTriggeringPolicy size="10MB" />-->
+<!--                <TimeBasedTriggeringPolicy />-->
+<!--            </Policies>-->
+<!--        </RollingFile>-->
 
         <!--        &lt;!&ndash; ERROR 파일 &ndash;&gt;-->
-        <RollingFile name="error" fileName="${logPath}/error_${date:yyyy}${date:MM}${date:dd}.log"
-                     filePattern="${logPath}/error_%d{yyyyMMdd}.log">
-            <PatternLayout charset="UTF-8" pattern="${fileLayout} %throwable{full}" />
-            <LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY" />
-            <Policies>
-                <SizeBasedTriggeringPolicy size="10MB" />
-                <TimeBasedTriggeringPolicy />
-            </Policies>
-        </RollingFile>
+<!--        <RollingFile name="error" fileName="${logPath}/error_${date:yyyy}${date:MM}${date:dd}.log"-->
+<!--                     filePattern="${logPath}/error_%d{yyyyMMdd}.log">-->
+<!--            <PatternLayout charset="UTF-8" pattern="${fileLayout} %throwable{full}" />-->
+<!--            <LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY" />-->
+<!--            <Policies>-->
+<!--                <SizeBasedTriggeringPolicy size="10MB" />-->
+<!--                <TimeBasedTriggeringPolicy />-->
+<!--            </Policies>-->
+<!--        </RollingFile>-->
     </Appenders>
 
     <loggers>
