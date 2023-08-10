@@ -8,4 +8,5 @@ import java.util.List;
 @Mapper
 public interface MemberDao {
     List<Member> getMembers();
+    int checkId(String id);
 }

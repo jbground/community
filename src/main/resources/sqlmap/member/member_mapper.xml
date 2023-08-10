@@ -5,5 +5,11 @@
     <select id="getMembers" resultType="com.jbground.community.model.Member">
         SELECT * FROM MEMBER
     </select>
+    
+    <select id="checkId" resultType="int" parameterType="String">
+        SELECT COUNT(*) FROM MEMBER
+        	WHERE
+        ID = #{id}	
+    </select>
 
 </mapper>

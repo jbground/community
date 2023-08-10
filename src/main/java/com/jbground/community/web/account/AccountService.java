@@ -28,4 +28,9 @@ public class AccountService {
     public List<Member> getMembers2(){
         return memberDao.getMembers();
     }
+    
+    public int checkId(String id) {
+		return memberDao.checkId(id);
+    	
+    }
 }

@@ -13,29 +13,44 @@
         var t = document.getElementById('duplicate');
 
         t.onclick = function (event){
-          var id = document.getElementById('a1');
+          var id = document.getElementById('a1').value;
+          
+          if(id.length==0){
+        	  alert('아이디를 입력 하세요.');
+          } else{
+        	  
+        	  axios({
+                  method : 'get',
+                  params : {
+                        'id' : id,
+                      },
+                  headers : {
+                    "Content-Type" : 'application/json',
+                  },
+                  url : '/json/test2',
+                })
+                  .then(response => {
+                    if(response.data.status === 1){
+                      alert('중복 된 아이디입니다.');
+                    } else {
+                    	alert('사용 가능한 아이디입니다.');
+                    }  
+                  })
+                  .catch(error => {
 
-          axios({
-            method : 'get',
-            url : '/json/test2',
-            data :{
-                  'id' : id,
-            }
-          })
-            .then(response => {
-              if(response.data.status === 0)
-                alert('중복된 아이디입니다.');
-            })
-            .catch(error => {
+                    console.log(error);
+                  });
+          }
+          
 
-              console.log(error);
-            });
+          
         }
       }
 
     </script>
   </head>
   <body>
+  <form action="/register" method="post"></form>
     <main id="main">
       <div class="contentBody">
         <div class="subContent">
@@ -48,7 +63,7 @@
                   </dt>
                   <dd class="flex gap8">
                     <input type="text" class="comInput" id="a1" />
-                    <button class="comBtn" id="duplicate"></button>>
+                    <button class="comBtn" id="duplicate">중복확인</button>>
                   </dd>
                 </dl>
                 <dl>
