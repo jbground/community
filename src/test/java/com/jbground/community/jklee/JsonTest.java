@@ -20,9 +20,10 @@ public class JsonTest {
         ObjectMapper objectMapper = new ObjectMapper();
         String s = objectMapper.writeValueAsString(member);
 
-        System.out.println("member toString() : ");
+        System.out.print("member toString() : ");
         System.out.println(member);
-        System.out.println("json format : ");
+        System.out.println();
+        System.out.print("json format : ");
         System.out.println(s);
     }
 }
