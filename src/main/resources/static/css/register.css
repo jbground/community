@@ -1,9 +1,6 @@
 @import url(../css/reset.css);
 @import url(../css/common.css);
-
-:root {
-  /*--register-input-color: ;*/
-}
+@import url(../css/layout.css);
 
 .subcontent {
   background: #efefef;
@@ -22,21 +19,37 @@
     -6px -6px 10px rgba(255, 255, 255, 0.5),
     6px 6px 8px rgba(255, 255, 255, 0.075), 6px 6px 10px rgba(0, 0, 0, 0.15);
   margin: 0 auto;
-  padding: 30px;
+  padding: 35px;
   color: #444;
-  font-size: 0.8rem;
-  font-weight: bold;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.wrapjoinForm .gap8 {
+  gap: 8px;
 }
 
 .wrapjoinForm dl {
-  /* display: flex; */
   gap: 20px;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
 .wrapjoinForm dl dt {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.7rem;
 }
+
+.wrapjoinForm .address .flex {
+  margin-bottom: 7px;
+}
+.wrapjoinForm .address .roadname {
+  margin-bottom: 7px;
+}
+
 .wrapjoinForm .submit {
-  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapjoinForm .submit button {
+  padding: 10px 15px;
 }

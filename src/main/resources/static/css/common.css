@@ -2,13 +2,19 @@
   display: flex;
 }
 
+.ai {
+  align-items: center;
+}
+
 .comInput {
   width: 100%;
-  padding: 0.4rem;
+  padding: 0.6rem;
   box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
   border: 0;
   outline: 0;
   border-radius: 360px;
+  padding-left: 1rem;
+  box-sizing: border-box;
 }
 .comInput:focus {
   box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
@@ -16,7 +22,13 @@
 }
 
 .comBtn {
-  border: 0;
-  outline: 0;
-  border-radius: 360px;
+  font-family: "Noto Sans";
+  font-weight: 500;
+  font-size: 0.8rem;
+  display: inline-block;
+  border-radius: 30px;
+  border: none;
+  background: gainsboro;
+  padding: 0 15px;
+  cursor: pointer;
 }
