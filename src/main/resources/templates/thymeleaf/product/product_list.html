@@ -19,13 +19,13 @@
 <body class="is-preload homepage">
     <div id="page-wrapper">
 
-
+		
         <div id="header-wrapper">
             <header id="header" class="container">
 
                 <!-- Logo -->
                 <div id="logo">
-                    <h1><a href="/main">Jbround</a></h1>
+                    <h1><a href="/main">Jbground</a></h1>
                     <span>by HTML5 UP</span>
                 </div>
 
@@ -59,72 +59,27 @@
             </header>
         </div>
     </div>
-
+	
     <div id="features-wrapper">
         <div class="container">
             <div class="row">
-                <div class="col-4 col-12-medium">
+
+                <div class="col-4 col-12-medium" th:each="item : ${productList}">
                     <!-- Box -->
                     <section class="box feature">
-                        <a href="#" class="image featured"><img src="/images/sample.png" alt="" /></a>
+                        <a href="#" class="image featured"><img th:src="${item.image}" alt="상품 이미지" /></a>
                         <div class="inner">
                             <header>
-                                <h2>상품1</h2>
-                                <p>상품설명</p>
+                                <h2 th:text="${item.title}">상품1</h2>
+                                <p th:text="${item.desc}">상품설명</p>
                             </header>
-                            <p>가격 : 40,000원</p>
-                            <p>수량 : 4</p>
+                            <p th:text="${item.price} + 원">가격 : 40,000원</p>
+                            <p th:text="${item.stock}">수량 : 4</p>
                         </div>
                     </section>
                 </div>
-                <div class="col-4 col-12-medium">
 
-                    <!-- Box -->
-                    <section class="box feature">
-                        <a href="#" class="image featured"><img src="/images/sample.png" alt="" /></a>
-                        <div class="inner">
-                            <header>
-                                <h2>상품2</h2>
-                                <p>상품설명</p>
-                            </header>
-                            <p>가격 : 40,000원</p>
-                            <p>수량 : 4</p>
-                        </div>
-                    </section>
 
-                </div>
-                <div class="col-4 col-12-medium">
-
-                    <!-- Box -->
-                    <section class="box feature">
-                        <a href="#" class="image featured"><img src="/images/sample.png" alt="" /></a>
-                        <div class="inner">
-                            <header>
-                                <h2>상품3</h2>
-                                <p>상품설명</p>
-                            </header>
-                            <p>가격 : 40,000원</p>
-                            <p>수량 : 4</p>
-                        </div>
-                    </section>
-
-                </div>
-                <div class="col-4 col-12-medium">
-
-                    <!-- Box -->
-                    <section class="box feature">
-                        <a href="#" class="image featured"><img src="/images/sample.png" alt="" /></a>
-                        <div class="inner">
-                            <header>
-                                <h2>상품4</h2>
-                                <p>상품설명</p>
-                            </header>
-                            <p>가격 : 40,000원</p>
-                            <p>수량 : 4</p>
-                        </div>
-                    </section>
-
-                </div>
             </div>
         </div>
         <nav>
