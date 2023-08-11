@@ -66,3 +66,22 @@ CREATE TABLE BOARD_COMMENT
     , ip varchar2(255)
     , primary key(seq)
 );
+
+
+-- 상품 테이블
+-- PK, 상품명, 상품설명, 상품이미지경로, 상품가격, 상품수량, 작성자, 작성일, 수정자, 수정일
+DROP TABLE if exists PRODUCT;
+CREATE TABLE PRODUCT
+(
+    seq integer NOT NULL
+    , title varchar2(255) NOT NULL
+    , desc varchar2(1000)
+    , image varchar2(255)
+    , price integer NOT NULL
+    , stock integer default 0
+    , creator varchar2(255)
+    , create_time timestamp
+    , editor varchar2(255)
+    , edit_time timestamp
+    , primary key(seq)
+);

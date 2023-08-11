@@ -27,3 +27,25 @@ INSERT INTO BOARD VALUES (21, '테스트입니다21', 'abc123', current_timestam
 INSERT INTO BOARD VALUES (22, '테스트입니다22', 'abc123', current_timestamp, current_timestamp, '게시물 등록 테스트 입니다.', '127.0.0.1');
 INSERT INTO BOARD VALUES (23, '테스트입니다23', 'abc123', current_timestamp, current_timestamp, '게시물 등록 테스트 입니다.', '127.0.0.1');
 INSERT INTO BOARD VALUES (24, '테스트입니다24', 'abc123', current_timestamp, current_timestamp, '게시물 등록 테스트 입니다.', '127.0.0.1');
+
+
+-- PRODUCT DATA
+INSERT INTO PRODUCT VALUES (1, '상품1', '상품설명입니다.', '/images/sample.png', 20000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
+INSERT INTO PRODUCT VALUES (2, '상품2', '상품설명입니다.', '/images/sample.png', 10000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
+INSERT INTO PRODUCT VALUES (3, '상품3', '상품설명입니다.', '/images/sample.png', 210000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
+INSERT INTO PRODUCT VALUES (4, '상품4', '상품설명입니다.', '/images/sample.png', 120000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
+INSERT INTO PRODUCT VALUES (5, '상품5', '상품설명입니다.', '/images/sample.png', 50000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
+INSERT INTO PRODUCT VALUES (6, '상품6', '상품설명입니다.', '/images/sample.png', 70000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
+INSERT INTO PRODUCT VALUES (7, '상품7', '상품설명입니다.', '/images/sample.png', 2000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
+INSERT INTO PRODUCT VALUES (8, '상품8', '상품설명입니다.', '/images/sample.png', 520000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
+INSERT INTO PRODUCT VALUES (9, '상품9', '상품설명입니다.', '/images/sample.png', 60000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
+INSERT INTO PRODUCT VALUES (10, '상품10', '상품설명입니다.', '/images/sample.png', 23000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
+INSERT INTO PRODUCT VALUES (11, '상품11', '상품설명입니다.', '/images/sample.png', 61000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
+INSERT INTO PRODUCT VALUES (12, '상품12', '상품설명입니다.', '/images/sample.png', 73000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
+INSERT INTO PRODUCT VALUES (13, '상품13', '상품설명입니다.', '/images/sample.png', 12000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
+INSERT INTO PRODUCT VALUES (14, '상품14', '상품설명입니다.', '/images/sample.png', 34000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
+INSERT INTO PRODUCT VALUES (15, '상품15', '상품설명입니다.', '/images/sample.png', 24000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
+INSERT INTO PRODUCT VALUES (16, '상품16', '상품설명입니다.', '/images/sample.png', 36000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
+INSERT INTO PRODUCT VALUES (17, '상품17', '상품설명입니다.', '/images/sample.png', 11000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
+INSERT INTO PRODUCT VALUES (18, '상품18', '상품설명입니다.', '/images/sample.png', 7000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
+INSERT INTO PRODUCT VALUES (19, '상품19', '상품설명입니다.', '/images/sample.png', 8000, 0, 'abc123', current_timestamp, 'abc123', current_timestamp);
