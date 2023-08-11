@@ -31,4 +31,36 @@
   background: gainsboro;
   padding: 0 15px;
   cursor: pointer;
+  transition: all 0.3s;
+}
+
+.comBtn:hover {
+  background: #afb1b1;
+}
+
+.comSelectBox {
+  flex: 1;
+  position: relative;
+}
+.comSelectBox::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  right: 0.625rem;
+}
+
+.comSelect {
+  position: relative;
+  width: 100%;
+  height: 28px;
+  padding-left: 10px;
+  box-sizing: border-box;
+  font-size: 0.9rem;
+  font-weight: 400;
+  border-radius: 2.3125rem;
+  color: #333;
+  appearance: none;
 }

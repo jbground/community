@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
   <head>
     <meta charset="UTF-8" />
     <title>Title</title>
@@ -7,50 +11,42 @@
     <link rel="stylesheet" href="/css/register.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
     <script>
+      window.onload = function () {
+        var t = document.getElementById("duplicate");
 
-      window.onload = function (){
+        t.onclick = function (event) {
+          var id = document.getElementById("a1").value;
 
-        var t = document.getElementById('duplicate');
-
-        t.onclick = function (event){
-          var id = document.getElementById('a1').value;
-          
-          if(id.length==0){
-        	  alert('아이디를 입력 하세요.');
-          } else{
-        	  
-        	  axios({
-                  method : 'get',
-                  params : {
-                        'id' : id,
-                      },
-                  headers : {
-                    "Content-Type" : 'application/json',
-                  },
-                  url : '/json/test2',
-                })
-                  .then(response => {
-                    if(response.data.status === 1){
-                      alert('중복 된 아이디입니다.');
-                    } else {
-                    	alert('사용 가능한 아이디입니다.');
-                    }  
-                  })
-                  .catch(error => {
-
-                    console.log(error);
-                  });
+          if (id.length == 0) {
+            alert("아이디를 입력 하세요.");
+          } else {
+            axios({
+              method: "get",
+              params: {
+                id: id,
+              },
+              headers: {
+                "Content-Type": "application/json",
+              },
+              url: "/json/test2",
+            })
+              .then((response) => {
+                if (response.data.status === 1) {
+                  alert("중복 된 아이디입니다.");
+                } else {
+                  alert("사용 가능한 아이디입니다.");
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
           }
-          
-
-          
-        }
-      }
-
+        };
+      };
     </script>
   </head>
   <body>
-  <form action="/register" method="post"></form>
+    <form action="/register" method="get"></form>
     <main id="main">
       <div class="contentBody">
         <div class="subContent">
@@ -61,7 +57,7 @@
                   <dt>
                     <label for="a1">아이디</label>
                   </dt>
-                  <dd class="flex gap8">
+                  <dd class="flex gap8 duplicate">
                     <input type="text" class="comInput" id="a1" />
                     <button class="comBtn" id="duplicate">중복확인</button>
                   </dd>
@@ -96,32 +92,38 @@
                     </div>
                   </dd>
                 </dl>
-                <dl class="flex">
-                  <dt>생일</dt>
+                <dl class="flex ai birthdate">
+                  <dt>생년월일</dt>
                   <dd>
-                    <div class="flex ai">
+                    <div class="flex">
                       <div class="comSelectBox">
-                        <label for="c1" class="hidden">년</label>
-                        <select name="" id="c1" class="comSelect">
-                          <option value="1990년">1990년</option>
-                        </select>
+                        <div class="comSelect">
+                          <label for="c1" class="hidden">년</label>
+                          <select name="" id="c1" class="comSelect">
+                            <option value="1990년">1990년</option>
+                          </select>
+                        </div>
                       </div>
                       <div class="comSelectBox">
-                        <label for="c2" class="hidden">월</label>
-                        <select name="" id="c2" class="comSelect">
-                          <option value="10월">10월</option>
-                        </select>
+                        <div class="comSelect">
+                          <label for="c1" class="hidden">월</label>
+                          <select name="" id="c1" class="comSelect">
+                            <option value="10월">01월</option>
+                          </select>
+                        </div>
                       </div>
                       <div class="comSelectBox">
-                        <label for="c3" class="hidden">일</label>
-                        <select name="" id="c3" class="comSelect">
-                          <option value="10일">10일</option>
-                        </select>
+                        <div class="comSelect">
+                          <label for="c1" class="hidden">일</label>
+                          <select name="" id="c1" class="comSelect">
+                            <option value="10일">01일</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
                   </dd>
                 </dl>
-                <dl class="flex">
+                <dl class="flex gender">
                   <dt>성별</dt>
                   <dd>
                     <div class="formRadio flex ai">
@@ -131,7 +133,7 @@
                           id="c1"
                           name="gender"
                           value=""
-                          checked=""
+                          checked
                         />
                         <label for="c1"> 남성 </label>
                       </div>

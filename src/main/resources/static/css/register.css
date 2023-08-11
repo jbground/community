@@ -38,6 +38,10 @@
   margin-bottom: 0.7rem;
 }
 
+.wrapjoinForm .duplicate button {
+  white-space: nowrap;
+}
+
 .wrapjoinForm .address .flex {
   margin-bottom: 7px;
 }
@@ -52,4 +56,20 @@
 }
 .wrapjoinForm .submit button {
   padding: 10px 15px;
+}
+.wrapjoinForm .birthdate dd {
+  flex: 1;
+}
+.wrapjoinForm .ai.birthdate {
+  align-items: baseline;
+}
+.wrapjoinForm .birthdate .comSelectBox::after {
+  width: 0rem;
+  height: 0rem;
+  border-top: 9px solid #666666;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+}
+.wrapjoinForm .gender {
+  align-items: baseline;
 }
