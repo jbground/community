@@ -1,13 +1,18 @@
 package com.jbground.community.web.product;
 
+import com.jbground.community.model.Paging;
 import com.jbground.community.model.Product;
 import com.jbground.community.web.account.AccountController;
+
+import org.hibernate.annotations.MetaValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -22,12 +27,23 @@ public class ProductController {
     @Resource(type = ProductService.class)
     private ProductService productService;
 
-    @RequestMapping(value = "/product/list")
-    public String productList(HttpServletRequest request, ModelMap model) throws Exception{
+    @RequestMapping(value = "/product/list", method = RequestMethod.GET)
+    public String productList(HttpServletRequest request, ModelMap model, @ModelAttribute Paging paging) throws Exception{
     	
-    	List<Product> productList = productService.getAllProductList();
+
+    	// 전체 게시물 조회
+    	List<Product> productList = productService.getProductList(paging.getPageNo());
     	
-    	model.addAttribute("productList", productList); 	
+    	
+    	// 전체 게시물 개수 
+    	int productListCnt = productService.getProductListCnt();
+    	
+    	int totalPageCnt =  (int) Math.ceil(productListCnt / 5);
+    	
+    	paging.setTotalCnt(totalPageCnt);
+    	
+    	model.addAttribute("productList", productList); 
+//    	model.addAttribute("listCnt", productListCnt);
 
 
         return "thymeleaf/product/product_list";

@@ -5,5 +5,31 @@
     <select id="selectAllProductList" resultType="com.jbground.community.model.Product">
         SELECT * FROM PRODUCT
     </select>
+    
+    <select id="productListCnt" resultType="int">
+        SELECT COUNT(*) FROM PRODUCT
+    </select>
+    
+    <select id="selectProductList" resultType="com.jbground.community.model.Product" parameterType="integer">
+        SELECT * FROM (
+   			SELECT 
+   				A.*
+   				, FLOOR((ROWNUM-1)/5+1) AS PAGE
+			FROM (
+      			SELECT 
+      				SEQ
+      				, TITLE
+      				, DESC
+      				, IMAGE
+      				, PRICE
+      				, STOCK
+   				FROM 
+   					PRODUCT 
+   				ORDER BY
+   					CREATE_TIME DESC
+     			 )
+   			A)
+		WHERE PAGE = #{pageNo}
+    </select>
 
 </mapper>

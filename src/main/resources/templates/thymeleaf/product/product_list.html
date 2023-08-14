@@ -15,6 +15,9 @@
         <script src="/assets/js/util.js"></script>
         <script src="/assets/js/main.js"></script>
     </head>
+    <script type="text/javascript">
+    
+    </script>
 </head>
 <body class="is-preload homepage">
     <div id="page-wrapper">
@@ -59,49 +62,52 @@
             </header>
         </div>
     </div>
+    
+	<form action="/product/list" method="get">
+		
+	    <div id="features-wrapper">
+	        <div class="container">
+	            <div class="row">
+
+	                <div class="col-4 col-12-medium" th:each="item : ${productList}">
+	                    <!-- Box -->
+	                    <section class="box feature">
+	                        <a href="#" class="image featured"><img th:src="${item.image}" alt="상품 이미지" /></a>
+	                        <div class="inner">
+	                            <header>
+	                                <h2 th:text="${item.title}">상품1</h2>
+	                                <p th:text="${item.desc}">상품설명</p>
+	                            </header>
+	                            <p th:text="${item.price} + 원">가격 : 40,000원</p>
+	                            <p th:text="${item.stock}">수량 : 4</p>
+	                        </div>
+	                    </section>
+	                </div>
 	
-    <div id="features-wrapper">
-        <div class="container">
-            <div class="row">
-
-                <div class="col-4 col-12-medium" th:each="item : ${productList}">
-                    <!-- Box -->
-                    <section class="box feature">
-                        <a href="#" class="image featured"><img th:src="${item.image}" alt="상품 이미지" /></a>
-                        <div class="inner">
-                            <header>
-                                <h2 th:text="${item.title}">상품1</h2>
-                                <p th:text="${item.desc}">상품설명</p>
-                            </header>
-                            <p th:text="${item.price} + 원">가격 : 40,000원</p>
-                            <p th:text="${item.stock}">수량 : 4</p>
-                        </div>
-                    </section>
-                </div>
-
-
-            </div>
-        </div>
-        <nav>
-            <ul class="pagination" style="padding-top : 50px; margin: 0 auto;">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+	
+	            </div>
+	        </div>
+	        <nav>
+	            <ul class="pagination" style="padding-top : 50px; margin: 0 auto;">
+	                <li>
+	                    <a href="#" aria-label="Previous">
+	                        <span aria-hidden="true">&laquo;</span>
+	                    </a>
+	                </li>
+	                <li><a href="#" th:onclick="|location.href='@{/product/list(pageNo=${1})}'|"  th:text="1"></a></li>
+	                <li><a href="#" th:onclick="|location.href='@{/product/list(pageNo=${2})}'|" th:text="2"></a></li>
+	                <li><a href="#" th:onclick="|location.href='@{/product/list(pageNo=${3})}'|" th:text="3"></a></li>
+	                <li><a href="#" th:onclick="|location.href='@{/product/list(pageNo=${4})}'|" th:text="4"></a></li>
+	                <li><a href="#" th:onclick="|location.href='@{/product/list(pageNo=${5})}'|" th:text="5"></a></li>
+	                <li>
+	                    <a href="#" aria-label="Next">
+	                        <span aria-hidden="true">&raquo;</span>
+	                    </a>
+	                </li>
+	            </ul>
+	        </nav>
+	    </div>
+    </form>
 
 </body>
 </html>

@@ -18,4 +18,13 @@ public class ProductService {
 	public List<Product> getAllProductList() throws Exception {
 		return productDao.getAllProductList();		
 	}
+	
+	public List<Product> getProductList(int pageNo) throws Exception {
+		return productDao.getProductList(pageNo);		
+	}
+	
+	public int getProductListCnt() {
+		return productDao.getProductListCnt();
+		
+	}
 }

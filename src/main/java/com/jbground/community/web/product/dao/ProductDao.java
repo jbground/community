@@ -13,4 +13,13 @@ public class ProductDao extends AbstractMybatisMapper{
 		return selectList("product.selectAllProductList");
 		
 	}
+	
+	public List<Product> getProductList(int pageNo) throws Exception{
+		return selectList("product.selectProductList", pageNo);
+		
+	}
+	
+	public int getProductListCnt() {		
+		return selectOne("product.productListCnt");	
+	}
 }
