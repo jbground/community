@@ -7,17 +7,16 @@ import com.jbground.community.web.account.AccountController;
 import org.hibernate.annotations.MetaValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class ProductController {
@@ -47,5 +46,16 @@ public class ProductController {
 
 
         return "thymeleaf/product/product_list";
+    }
+
+    @RequestMapping(value = "/product/list2")
+    public String productList(HttpServletRequest request, ModelMap model) throws Exception{
+        return "thymeleaf/product/product_list2";
+    }
+
+    @RequestMapping(value = "/product/pagination", method = RequestMethod.GET)
+    @ResponseBody
+    public Page<Product> productPagination(@ModelAttribute Paging paging, HttpServletRequest request) throws Exception {
+        return productService.getProductListByPage(paging);
     }
 }

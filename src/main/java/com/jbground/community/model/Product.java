@@ -1,18 +1,43 @@
 package com.jbground.community.model;
 
+import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 
+@Entity
+@Table(name = "PRODUCT")
 public class Product {
+
+	@Id
 	private int seq;
+
+	@Column
 	private String title;
+
+	@Column
 	private String desc;
+
+	@Column
 	private String image;
+
+	@Column
 	private int price;
+
+	@Column
 	private int stock;
+
+	@Column
 	private String creator;
-	private Date create_time;
+
+	@Column
+	private LocalDateTime create_time;
+
+	@Column
 	private String editor;
-	private Date edit_time;
+
+	@Column
+	private LocalDateTime edit_time;
 	
 	public int getSeq() {
 		return seq;
@@ -69,15 +94,23 @@ public class Product {
 	public void setCreator(String creator) {
 		this.creator = creator;
 	}
-	
-	public Date getCreate_time() {
+
+	public LocalDateTime getCreate_time() {
 		return create_time;
 	}
-	
-	public void setCreate_time(Date create_time) {
+
+	public void setCreate_time(LocalDateTime create_time) {
 		this.create_time = create_time;
 	}
-	
+
+	public LocalDateTime getEdit_time() {
+		return edit_time;
+	}
+
+	public void setEdit_time(LocalDateTime edit_time) {
+		this.edit_time = edit_time;
+	}
+
 	public String getEditor() {
 		return editor;
 	}
@@ -86,13 +119,6 @@ public class Product {
 		this.editor = editor;
 	}
 	
-	public Date getEdit_time() {
-		return edit_time;
-	}
-	
-	public void setEdit_time(Date edit_time) {
-		this.edit_time = edit_time;
-	}
-	
+
 	
 }

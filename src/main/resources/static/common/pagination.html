@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+</head>
+<body>
+<div class="pagination" id="pagination">
+    <a class="page_first" href="#">
+        <img src="/assets/images/btn_pagination_first.png" alt="처음">
+    </a>
+    <a class="page_prev" href="#">
+        <img src="/assets/images/btn_pagination_prev.png" alt="이전">
+    </a>
+    <a class="page_btn" href="#">1</a>
+    <a class="page_btn" href="#">2</a>
+    <a class="page_btn" href="#">3</a>
+    <a class="page_btn" href="#">4</a>
+    <a class="page_btn" href="#">5</a>
+    <a class="page_btn" href="#">6</a>
+    <a class="page_next" href="#">
+        <img src="/assets/images/btn_pagination_next.png" alt="다음">
+    </a>
+    <a class="page_last" href="#">
+        <img src="/assets/images/btn_pagination_last.png" alt="마지막">
+    </a>
+</div>
+</body>
+</html>
+<style>
+    .pagination > a:not(.page_btn){ width:18px; height:18px; background-size:18px auto !important; }
+    .pagination .page_btn{ min-width:18px !important; height:18px !important; line-height:17px !important; font-size:12px; }
+</style>
+
