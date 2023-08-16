@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.jbground.community.interceptor.LayoutInterceptor;
+import com.nhncorp.lucy.security.xss.XssSaxFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -24,7 +25,10 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     //D:/jsjeong/community/src/main/resources/static - java 파일 있는 곳 절대경로
     private String path = String.valueOf(Paths.get(System.getProperty("user.dir"), "/src/main/resources/static"));
 
-
+    @Bean
+    public XssSaxFilter xssSaxFilter() {
+        return XssSaxFilter.getInstance("lucy-xss-sax.xml", true);
+    }
     @Bean
     public LayoutInterceptor layoutInterceptor(){
         return new LayoutInterceptor();

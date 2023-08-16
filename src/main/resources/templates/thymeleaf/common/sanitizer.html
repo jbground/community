@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+    </script>
+</head>
+<body>
+    <form id="subs" method="post" name="subs" onsubmit="doSubmit(this);return false;">
+        ※ 에디터의 상세 설명은 Alt + 0을 누르세요.<br/>
+        <textarea id="post_content" name="content" style="visibility: hidden; display: none;"></textarea>
+        <textarea id="editor_content" name="editor_content" style="visibility: hidden; display: none;"></textarea>
+        <script type="text/javascript">
+        </script>
+        <br />※ 에디터의 각 기능은 방향키를 사용하여 이용할수 있습니다.
+        <br />※ 내용에 이미지를 삽입하는 경우 이미지에 대한 자세한 설명을 작성해주십시오.
+
+        <button type="submit" class="enroll__button btn_color_hilight">등록</button>
+
+    </form>
+</body>
+</html>
