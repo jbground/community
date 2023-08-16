@@ -10,12 +10,13 @@
     <!-- =================== LINK =================== -->
     <link rel="stylesheet" href="/css/register.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
     <script>
       window.onload = function () {
         var t = document.getElementById("duplicate");
 
         t.onclick = function (event) {
-          var id = document.getElementById("a1").value;
+          var id = document.getElementById("userId").value;
 
           if (id.length == 0) {
             alert("아이디를 입력 하세요.");
@@ -43,10 +44,62 @@
           }
         };
       };
+      
+      /* function isSame() {
+    	var pw = document.getElementById("pw").value
+    	console.log(pw);
+    	var confirmPW = document.getElementById("checkPw").value
+    	console.log(confirmPW);
+		if(pw.length < 8 || pw.length > 10){
+			document.getElementById('pwConfirm1').innerHTML='비밀번호는 8자 이상 10자 이하로 입력해주세요.';
+			document.getElementById('pwConfirm1').style.color='gray';
+		}
+		if(document.getElementById('pw').value != '' && document.getElementById('checkPw').value !='') {
+	        if(document.getElementById('pw').value == document.getElementById('checkPw').value) {
+	            document.getElementById('pwConfirm2').innerHTML='비밀번호가 일치합니다.';
+	            document.getElementById('pwConfirm2').style.color='green';
+	        }
+	        else {
+	            document.getElementById('pwConfirm2').innerHTML='비밀번호가 일치하지 않습니다.';
+	            document.getElementById('pwConfirm2').style.color='red';
+	        }
+	    }
+	} */
+      
+    function pwCheckFunction() {
+    	var pw = document.getElementById("pw").value;
+    	var confirmPW = document.getElementById("checkPw").value;
+    	
+    	// 비밀번호 영문+숫자+특수문자 조합 (8~15자리 입력) 정규식
+    	var reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+    	
+    	if(!reg.test(pw)){
+    		document.getElementById('pwConfirm1').innerHTML='비밀번호는 영문자+숫자+특수문자 조합으로 8~15자리 까지 입력하세요.';
+            document.getElementById('pwConfirm1').style.color='red';
+    	} else {
+    		document.getElementById('pwConfirm1').innerHTML='';
+    		
+    		if(confirmPW.length > 0){
+	       		if(pw != confirmPW){
+	           		document.getElementById('pwConfirm2').innerHTML='비밀번호가 일치하지 않습니다.';
+	                document.getElementById('pwConfirm2').style.color='red';
+	           	} else {
+	           		document.getElementById('pwConfirm2').innerHTML='비밀번호가 일치합니다.';
+	    	            document.getElementById('pwConfirm2').style.color='green';
+	           	}
+    		}	
+
+    	}
+    	
+    	
+    	
+    	
+    	
+	}
     </script>
   </head>
   <body>
-    <form action="/register" method="get"></form>
+    <form action="/register" method="get" name="joinFormCheck"></form>
     <main id="main">
       <div class="contentBody">
         <div class="subContent">
@@ -58,7 +111,7 @@
                     <label for="a1">아이디</label>
                   </dt>
                   <dd class="flex gap8 duplicate">
-                    <input type="text" class="comInput" id="a1" />
+                    <input type="text" class="comInput" id="userId" />
                     <button class="comBtn" id="duplicate">중복확인</button>
                   </dd>
                 </dl>
@@ -68,7 +121,8 @@
                   </dt>
                   <dd>
                     <div class="">
-                      <input type="password" id="a2" class="comInput" />
+                      <input type="password" id="pw"  onkeyup="pwCheckFunction();" class="comInput" />
+                      <span id="pwConfirm1"></span>
                     </div>
                   </dd>
                 </dl>
@@ -78,7 +132,8 @@
                   </dt>
                   <dd>
                     <div class="">
-                      <input type="password" id="a3" class="comInput" />
+                      <input type="password" id="checkPw" onkeyup="pwCheckFunction();" class="comInput" />
+                      <span id="pwConfirm2"></span>
                     </div>
                   </dd>
                 </dl>
