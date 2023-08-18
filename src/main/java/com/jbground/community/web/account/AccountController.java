@@ -92,18 +92,17 @@ public class AccountController {
     
     @ResponseBody
     @RequestMapping(value = "/insertMember", method = RequestMethod.GET)
-    public String insertMember(HttpServletRequest request, ModelMap model, @ModelAttribute Member member) throws Exception {
+    public Boolean insertMember(HttpServletRequest request, ModelMap model, @ModelAttribute Member member) throws Exception {
     	
     	boolean result = false; 
     	
-    	if(member.getId() != null) {
+    	if(member.getId() != null) {		
     		accountService.insertMember(member);
-    		result = true;
+    		
+    		return true;
     	} 
     	
-    	model.addAttribute("result", result);
     	
-    	
-    	return "thymeleaf/register/register";
+    	return result;
     }
 }
