@@ -12,7 +12,7 @@ public class JsonTest {
 
         Member member = new Member();
         member.setId("asdsad");
-        member.setNickName("fassd");
+        member.setNickname("fassd");
         member.setPhone("010-0000-0000");
 
 
