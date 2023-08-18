@@ -15,12 +15,15 @@ public class Member {
 
     @Column
     private String password;
+    
+    @Column
+    private String name;
 
     @Column
     private LocalDateTime register_date;
 
     @Column
-    private String nickName;
+    private String nickname;
 
     @Column
     private String phone;
@@ -48,118 +51,127 @@ public class Member {
 
     @Column
     private int address_seq;
+  
 
     public String getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public LocalDateTime getRegister_date() {
-        return register_date;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setRegister_date(LocalDateTime register_date) {
-        this.register_date = register_date;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getNickName() {
-        return nickName;
-    }
+	public LocalDateTime getRegister_date() {
+		return register_date;
+	}
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
+	public void setRegister_date(LocalDateTime register_date) {
+		this.register_date = register_date;
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public String getNickname() {
+		return nickname;
+	}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 
-    public String getSex() {
-        return sex;
-    }
+	public String getPhone() {
+		return phone;
+	}
 
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-    public String getBirth() {
-        return birth;
-    }
+	public String getSex() {
+		return sex;
+	}
 
-    public void setBirth(String birth) {
-        this.birth = birth;
-    }
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getBirth() {
+		return birth;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
 
-    public String getRank() {
-        return rank;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setRank(String rank) {
-        this.rank = rank;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getIp() {
-        return ip;
-    }
+	public String getRank() {
+		return rank;
+	}
 
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
+	public void setRank(String rank) {
+		this.rank = rank;
+	}
 
-    public LocalDateTime getLogin_date() {
-        return login_date;
-    }
+	public String getIp() {
+		return ip;
+	}
 
-    public void setLogin_date(LocalDateTime login_date) {
-        this.login_date = login_date;
-    }
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
 
-    public LocalDateTime getChange_date() {
-        return change_date;
-    }
+	public LocalDateTime getLogin_date() {
+		return login_date;
+	}
 
-    public void setChange_date(LocalDateTime change_date) {
-        this.change_date = change_date;
-    }
+	public void setLogin_date(LocalDateTime login_date) {
+		this.login_date = login_date;
+	}
 
-    public int getAddress_seq() {
-        return address_seq;
-    }
+	public LocalDateTime getChange_date() {
+		return change_date;
+	}
 
-    public void setAddress_seq(int address_seq) {
-        this.address_seq = address_seq;
-    }
+	public void setChange_date(LocalDateTime change_date) {
+		this.change_date = change_date;
+	}
 
-    @Override
+	public int getAddress_seq() {
+		return address_seq;
+	}
+
+	public void setAddress_seq(int address_seq) {
+		this.address_seq = address_seq;
+	}
+
+	@Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Member{");
         sb.append("id='").append(id).append('\'');
         sb.append(", password='").append(password).append('\'');
         sb.append(", register_date=").append(register_date);
-        sb.append(", nickName='").append(nickName).append('\'');
+        sb.append(", nickname='").append(nickname).append('\'');
         sb.append(", phone='").append(phone).append('\'');
         sb.append(", sex='").append(sex).append('\'');
         sb.append(", birth='").append(birth).append('\'');

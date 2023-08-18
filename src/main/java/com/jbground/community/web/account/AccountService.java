@@ -33,4 +33,8 @@ public class AccountService {
 		return memberDao.checkId(id);
     	
     }
+    
+    public void insertMember(Member member) {
+    	memberDao.insertMember(member);
+    }
 }

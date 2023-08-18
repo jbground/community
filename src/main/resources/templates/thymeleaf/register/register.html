@@ -16,8 +16,8 @@
         var t = document.getElementById("duplicate");
 
         t.onclick = function (event) {
-          var id = document.getElementById("userId").value;
-
+          var id = document.getElementById("id").value;
+        
           if (id.length == 0) {
             alert("아이디를 입력 하세요.");
           } else {
@@ -33,7 +33,7 @@
             })
               .then((response) => {
                 if (response.data.status === 1) {
-                  alert("중복 된 아이디입니다.");
+                  alert("중복 된 아이디입니다.");                 
                 } else {
                   alert("사용 가능한 아이디입니다.");
                 }
@@ -45,30 +45,9 @@
         };
       };
       
-      /* function isSame() {
-    	var pw = document.getElementById("pw").value
-    	console.log(pw);
-    	var confirmPW = document.getElementById("checkPw").value
-    	console.log(confirmPW);
-		if(pw.length < 8 || pw.length > 10){
-			document.getElementById('pwConfirm1').innerHTML='비밀번호는 8자 이상 10자 이하로 입력해주세요.';
-			document.getElementById('pwConfirm1').style.color='gray';
-		}
-		if(document.getElementById('pw').value != '' && document.getElementById('checkPw').value !='') {
-	        if(document.getElementById('pw').value == document.getElementById('checkPw').value) {
-	            document.getElementById('pwConfirm2').innerHTML='비밀번호가 일치합니다.';
-	            document.getElementById('pwConfirm2').style.color='green';
-	        }
-	        else {
-	            document.getElementById('pwConfirm2').innerHTML='비밀번호가 일치하지 않습니다.';
-	            document.getElementById('pwConfirm2').style.color='red';
-	        }
-	    }
-	} */
-      
     function pwCheckFunction() {
-    	var pw = document.getElementById("pw").value;
-    	var confirmPW = document.getElementById("checkPw").value;
+    	var pw = document.getElementById("password").value;
+    	var checkPw = document.getElementById("checkPw").value;
     	
     	// 비밀번호 영문+숫자+특수문자 조합 (8~15자리 입력) 정규식
     	var reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
@@ -79,186 +58,230 @@
     	} else {
     		document.getElementById('pwConfirm1').innerHTML='';
     		
-    		if(confirmPW.length > 0){
-	       		if(pw != confirmPW){
+    		if(!checkPw.length == 0){
+	       		if(pw != checkPw){
 	           		document.getElementById('pwConfirm2').innerHTML='비밀번호가 일치하지 않습니다.';
 	                document.getElementById('pwConfirm2').style.color='red';
 	           	} else {
 	           		document.getElementById('pwConfirm2').innerHTML='비밀번호가 일치합니다.';
-	    	            document.getElementById('pwConfirm2').style.color='green';
+	    	        document.getElementById('pwConfirm2').style.color='green';
 	           	}
     		}	
 
-    	}
-    	
-    	
-    	
-    	
+    	}	
     	
 	}
+	
+	function signUp(){
+		var id = document.getElementById("userId").value;
+		var pw = document.getElementById("password").value;
+		var checkPw = document.getElementById("checkPw").value;
+		var name = document.getElementById("name").value;
+		
+		if(id.length == 0){
+			alert("아이디를 입력 하세요.");
+		} else if(pw.length == 0){
+			alert("비밀번호를 입력 하세요.");
+		} else if(checkPw.length == 0){
+			alert("비밀번호를 확인해주세요.");
+		} else if(name.length == 0){
+			alert("이름을 입력 하세요.");
+		} 
+		
+
+	}
+
+		
+	$(document).ready(function(){
+		$("#signUp").click(function(){
+			var memberData = $("#joinForm").serialize();
+			console.log(memberData);
+		    
+			$.ajax({
+			    type: "GET",
+			    url: "/insertMember",
+			    data: memberData,
+			    dataType: "json",
+			    success:function(result) {
+			    	console.log(result);
+			    	if(result){
+			    		 alert("회원가입 성공");
+			    	} else {
+			    		alert("다시 시도해 주세요.");
+			    	}
+				},
+				error:function(xhr, ajaxOpts, thrownErr) {
+					alert(thrownErr);
+				}
+			}); 
+
+		});
+
+	});
+	
     </script>
   </head>
   <body>
-    <form action="/register" method="get" name="joinFormCheck"></form>
-    <main id="main">
-      <div class="contentBody">
-        <div class="subContent">
-          <div class="subBody">
-            <div class="subcontent">
-              <div class="wrapjoinForm">
-                <dl>
-                  <dt>
-                    <label for="a1">아이디</label>
-                  </dt>
-                  <dd class="flex gap8 duplicate">
-                    <input type="text" class="comInput" id="userId" />
-                    <button class="comBtn" id="duplicate">중복확인</button>
-                  </dd>
-                </dl>
-                <dl>
-                  <dt>
-                    <label for="a2">비밀번호</label>
-                  </dt>
-                  <dd>
-                    <div class="">
-                      <input type="password" id="pw"  onkeyup="pwCheckFunction();" class="comInput" />
-                      <span id="pwConfirm1"></span>
-                    </div>
-                  </dd>
-                </dl>
-                <dl>
-                  <dt>
-                    <label for="a3">비밀번호 확인</label>
-                  </dt>
-                  <dd>
-                    <div class="">
-                      <input type="password" id="checkPw" onkeyup="pwCheckFunction();" class="comInput" />
-                      <span id="pwConfirm2"></span>
-                    </div>
-                  </dd>
-                </dl>
-                <dl>
-                  <dt>
-                    <label for="a4">이름</label>
-                  </dt>
-                  <dd>
-                    <div class="">
-                      <input type="text" id="a4" class="comInput" />
-                    </div>
-                  </dd>
-                </dl>
-                <dl class="flex ai birthdate">
-                  <dt>생년월일</dt>
-                  <dd>
-                    <div class="flex">
-                      <div class="comSelectBox">
-                        <div class="comSelect">
-                          <label for="c1" class="hidden">년</label>
-                          <select name="" id="c1" class="comSelect">
-                            <option value="1990년">1990년</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="comSelectBox">
-                        <div class="comSelect">
-                          <label for="c1" class="hidden">월</label>
-                          <select name="" id="c1" class="comSelect">
-                            <option value="10월">01월</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="comSelectBox">
-                        <div class="comSelect">
-                          <label for="c1" class="hidden">일</label>
-                          <select name="" id="c1" class="comSelect">
-                            <option value="10일">01일</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </dd>
-                </dl>
-                <dl class="flex gender">
-                  <dt>성별</dt>
-                  <dd>
-                    <div class="formRadio flex ai">
-                      <div>
-                        <input
-                          type="radio"
-                          id="c1"
-                          name="gender"
-                          value=""
-                          checked
-                        />
-                        <label for="c1"> 남성 </label>
-                      </div>
-                      <div>
-                        <input type="radio" id="c2" name="gender" value="" />
-                        <label for="c2"> 여성 </label>
-                      </div>
-                    </div>
-                  </dd>
-                </dl>
-                <dl>
-                  <dt><label for="a5">휴대폰 번호</label></dt>
-                  <dd>
-                    <div class="">
-                      <input type="text" id="a5" class="comInput" />
-                    </div>
-                  </dd>
-                </dl>
-                <dl class="address">
-                  <dt>주소</dt>
-                  <dd>
-                    <div class="flex gap8">
-                      <input
-                        type="text"
-                        id="zip-code"
-                        class="comInput"
-                        placeholder="우편번호"
-                        readonly
-                      />
-                      <input
-                        type="button"
-                        class="comBtn"
-                        onclick="execDaumPostcode()"
-                        value="우편번호 찾기"
-                      />
-                    </div>
-                    <div>
-                      <input
-                        type="text"
-                        id="address-1"
-                        class="comInput roadname"
-                        placeholder="도로명주소"
-                        readonly
-                      />
-                      <input
-                        type="text"
-                        id="address-2"
-                        class="comInput"
-                        placeholder="상세주소"
-                      />
-                    </div>
-                  </dd>
-                </dl>
-                <dl>
-                  <dt><label for="a6">이메일</label></dt>
-                  <dd>
-                    <div class="">
-                      <input type="text" id="a6" class="comInput" />
-                    </div>
-                  </dd>
-                </dl>
-                <div class="submit">
-                  <button type="submit" class="comBtn">가입하기</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
+    <form action="/register" method="get" name="joinForm">
+	    <main id="main">
+	      <div class="contentBody">
+	        <div class="subContent">
+	          <div class="subBody">
+	            <div class="subcontent">
+	              <div class="wrapjoinForm">
+	                <dl>
+	                  <dt>
+	                    <label for="a1">아이디</label>
+	                  </dt>
+	                  <dd class="flex gap8 duplicate">
+	                    <input type="text" class="comInput" id="id" name="id" th:value="${param.id}" />
+	                    <button class="comBtn" id="duplicate">중복확인</button>
+	                  </dd>
+	                </dl>
+	                <dl>
+	                  <dt>
+	                    <label for="a2">비밀번호</label>
+	                  </dt>
+	                  <dd>
+	                    <div class="">
+	                      <input type="password" id="password"  name="password"  onkeyup="pwCheckFunction();"  class="comInput" />
+	                      <span id="pwConfirm1"></span>
+	                    </div>
+	                  </dd>
+	                </dl>
+	                <dl>
+	                  <dt>
+	                    <label for="a3">비밀번호 확인</label>
+	                  </dt>
+	                  <dd>
+	                    <div class="">
+	                      <input type="password" id="checkPw" name="checkPw" onkeyup="pwCheckFunction();" class="comInput" />
+	                      <span id="pwConfirm2"></span>
+	                    </div>
+	                  </dd>
+	                </dl>
+	                <dl>
+	                  <dt>
+	                    <label for="a4">이름</label>
+	                  </dt>
+	                  <dd>
+	                    <div class="">
+	                      <input type="text" id="name" name="name"  class="comInput" />
+	                    </div>
+	                  </dd>
+	                </dl>
+	                <dl class="flex ai birthdate">
+	                  <dt>생년월일</dt>
+	                  <dd>
+	                    <div class="flex">
+	                      <div class="comSelectBox">
+	                        <div class="comSelect">
+	                          <label for="c1" class="hidden">년</label>
+	                          <select name="" id="c1" class="comSelect">
+	                            <option value="1990년">1990년</option>
+	                          </select>
+	                        </div>
+	                      </div>
+	                      <div class="comSelectBox">
+	                        <div class="comSelect">
+	                          <label for="c1" class="hidden">월</label>
+	                          <select name="" id="c1" class="comSelect">
+	                            <option value="10월">01월</option>
+	                          </select>
+	                        </div>
+	                      </div>
+	                      <div class="comSelectBox">
+	                        <div class="comSelect">
+	                          <label for="c1" class="hidden">일</label>
+	                          <select name="" id="c1" class="comSelect">
+	                            <option value="10일">01일</option>
+	                          </select>
+	                        </div>
+	                      </div>
+	                    </div>
+	                  </dd>
+	                </dl>
+	                <dl class="flex gender">
+	                  <dt>성별</dt>
+	                  <dd>
+	                    <div class="formRadio flex ai">
+	                      <div>
+	                        <input
+	                          type="radio"
+	                          id="c1"
+	                          value=""
+	                          checked
+	                        />
+	                        <label for="c1"> 남성 </label>
+	                      </div>
+	                      <div>
+	                        <input type="radio" id="c2"  value="" />
+	                        <label for="c2"> 여성 </label>
+	                      </div>
+	                    </div>
+	                  </dd>
+	                </dl>
+	                <dl>
+	                  <dt><label for="a5">휴대폰 번호</label></dt>
+	                  <dd>
+	                    <div class="">
+	                      <input type="text" id="a5" class="comInput" />
+	                    </div>
+	                  </dd>
+	                </dl>
+	                <dl class="address">
+	                  <dt>주소</dt>
+	                  <dd>
+	                    <div class="flex gap8">
+	                      <input
+	                        type="text"
+	                        id="zip-code"
+	                        class="comInput"
+	                        placeholder="우편번호"
+	                        readonly
+	                      />
+	                      <input
+	                        type="button"
+	                        class="comBtn"
+	                        onclick="execDaumPostcode()"
+	                        value="우편번호 찾기"
+	                      />
+	                    </div>
+	                    <div>
+	                      <input
+	                        type="text"
+	                        id="address-1"
+	                        class="comInput roadname"
+	                        placeholder="도로명주소"
+	                        readonly
+	                      />
+	                      <input
+	                        type="text"
+	                        id="address-2"
+	                        class="comInput"
+	                        placeholder="상세주소"
+	                      />
+	                    </div>
+	                  </dd>
+	                </dl>
+	                <dl>
+	                  <dt><label for="a6">이메일</label></dt>
+	                  <dd>
+	                    <div class="">
+	                      <input type="text" id="a6" class="comInput" />
+	                    </div>
+	                  </dd>
+	                </dl>
+	                <div class="submit">
+	                  <button type="submit" class="comBtn" id="signUp">회원가입</button>
+	                </div>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </main>
+    </form>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
       function execDaumPostcode() {

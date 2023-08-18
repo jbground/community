@@ -11,5 +11,31 @@
         	WHERE
         ID = #{id}	
     </select>
+    
+    <insert id="insertMember" parameterType="com.jbground.community.model.Member">
+    	INSERT 
+    		INTO
+    	MEMBER (
+    			ID
+    			, NAME
+    			, PASSWORD
+    			, REGISTER_DATE
+    			, IP
+    			, LOGIN_DATE
+    			, CHANGE_DATE
+    			, ADDRESS_SEQ
+    			)
+    		VALUES
+	    		(
+	    		#{id}
+	    		, #{name}
+	    		, #{password}
+	    		, current_timestamp
+	    		, '127.0.0.1'
+	    		, current_timestamp
+	    		, current_timestamp
+	    		, 0
+	    		)
+    </insert>
 
 </mapper>

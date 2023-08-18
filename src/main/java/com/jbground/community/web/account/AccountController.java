@@ -54,10 +54,10 @@ public class AccountController {
     /**
      * 회원 가입
      */
-    @RequestMapping(value = "/register")
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register(HttpServletRequest request, ModelMap model) throws Exception {
 
-
+    	
         return "thymeleaf/register/register";
     }
 
@@ -88,5 +88,22 @@ public class AccountController {
         }
 
         response.getWriter().print(objectMapper.writeValueAsString(map));
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "/insertMember", method = RequestMethod.GET)
+    public String insertMember(HttpServletRequest request, ModelMap model, @ModelAttribute Member member) throws Exception {
+    	
+    	boolean result = false; 
+    	
+    	if(member.getId() != null) {
+    		accountService.insertMember(member);
+    		result = true;
+    	} 
+    	
+    	model.addAttribute("result", result);
+    	
+    	
+    	return "thymeleaf/register/register";
     }
 }
