@@ -33,7 +33,7 @@
             })
               .then((response) => {
                 if (response.data.status === 1) {
-                  alert("중복 된 아이디입니다.");                 
+                  alert("중복 된 아이디입니다.");    
                 } else {
                   alert("사용 가능한 아이디입니다.");
                 }
@@ -71,25 +71,6 @@
     	}	
     	
 	}
-	
-	function signUp(){
-		var id = document.getElementById("userId").value;
-		var pw = document.getElementById("password").value;
-		var checkPw = document.getElementById("checkPw").value;
-		var name = document.getElementById("name").value;
-		
-		if(id.length == 0){
-			alert("아이디를 입력 하세요.");
-		} else if(pw.length == 0){
-			alert("비밀번호를 입력 하세요.");
-		} else if(checkPw.length == 0){
-			alert("비밀번호를 확인해주세요.");
-		} else if(name.length == 0){
-			alert("이름을 입력 하세요.");
-		} 
-		
-
-	}
 
 		
 	$(document).ready(function(){
@@ -126,24 +107,47 @@
 		$("#signUp").click(function(){
 			var memberData = $("#joinForm").serialize();
 			console.log(memberData);
+			
+			var id = $("#id").val();
+			var pw = $("#password").val();
+			var checkPw = $("#checkPw").val();
+			var name = $("#name").val();
+			
+			if(id.length == 0){
+				alert("아이디를 입력 하세요.");
+			} else if(pw.length == 0){
+				alert("비밀번호를 입력 하세요.");
+			} else if(checkPw.length == 0){
+				alert("비밀번호를 확인해주세요.");
+			} else if(name.length == 0){
+				alert("이름을 입력 하세요.");
+			} else {
 		    
-			$.ajax({
-			    type: "GET",
-			    url: "/insertMember",
-			    data: memberData,
-			    dataType: "json",
-			    success:function(result) {
-			    	console.log(result);
-			    	if(result){
-			    		 alert("회원가입 성공");
-			    	} else {
-			    		alert("다시 시도해 주세요.");
-			    	}
-				},
-				error:function(xhr, ajaxOpts, thrownErr) {
-					alert(thrownErr);
-				}
-			}); 
+				$.ajax({
+				    type: "GET",
+				    url: "/insertMember",
+				    data: memberData,
+				    dataType: "json",
+				    success:function(result) {
+				    	console.log(result);
+				    	var data = result.msg; // msg = 서버에서 받은  키 값 
+				    	console.log(data);
+				    	if(data == '회원가입 성공'){
+				    		 alert("회원가입 성공");
+				    		 location.href = "/product/list";
+				    	} else if(data == '비밀번호를 형식에 맞춰 작성해 주세요.') {
+				    		alert("비밀번호를 형식에 맞춰 작성해 주세요.");
+				    	} else if(data == '다시 시도 해주세요.') {
+				    		alert("다시 시도 해주세요.");
+				    	}
+				    
+					},
+					error:function(xhr, ajaxOpts, thrownErr) {
+						alert(thrownErr);
+					}
+				}); 
+				
+			}	
 
 		});
 
@@ -164,7 +168,7 @@
 	                    <label for="a1">아이디</label>
 	                  </dt>
 	                  <dd class="flex gap8 duplicate">
-	                    <input type="text" class="comInput" id="id" name="id" th:value="${param.id}" />
+	                    <input type="text" class="comInput" id="id" name="id" />
 	                    <button type="button" class="comBtn" id="duplicate">중복확인</button>
 	                  </dd>
 	                </dl>
@@ -303,7 +307,7 @@
 	                  </dd>
 	                </dl>
 	                <div class="submit">
-	                  <button type="button" class="comBtn" id="signUp" th:onclick="|location.href='@{/product/list}'|">회원가입</button>
+	                  <button type="button" class="comBtn" id="signUp">회원가입</button>
 	                </div>
 	              </div>
 	            </div>

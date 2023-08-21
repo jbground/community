@@ -92,17 +92,13 @@ public class AccountController {
     
     @ResponseBody
     @RequestMapping(value = "/insertMember", method = RequestMethod.GET)
-    public Boolean insertMember(HttpServletRequest request, ModelMap model, @ModelAttribute Member member) throws Exception {
+    public  Map<String, Object>  insertMember(HttpServletRequest request, ModelMap model, @ModelAttribute Member member) throws Exception {
+    	Map<String, Object> map = new HashMap<>();
+   
+    	String msg = accountService.insertMember(member);
+
+    	map.put("msg", msg);
     	
-    	boolean result = false; 
-    	
-    	if(member.getId() != null) {		
-    		accountService.insertMember(member);
-    		
-    		return true;
-    	} 
-    	
-    	
-    	return result;
+    	return map;
     }
 }
