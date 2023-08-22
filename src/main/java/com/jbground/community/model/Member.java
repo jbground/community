@@ -17,6 +17,9 @@ public class Member {
     private String password;
     
     @Column
+    private String checkPassword;
+    
+    @Column
     private String name;
 
     @Column
@@ -67,6 +70,14 @@ public class Member {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}	
+
+	public String getCheckPassword() {
+		return checkPassword;
+	}
+
+	public void setCheckPassword(String checkPassword) {
+		this.checkPassword = checkPassword;
 	}
 
 	public String getName() {

@@ -17,7 +17,9 @@
 
         t.onclick = function (event) {
           var id = document.getElementById("id").value;
-        
+          var idChk = document.getElementById("idChk");
+         
+
           if (id.length == 0) {
             alert("아이디를 입력 하세요.");
           } else {
@@ -33,10 +35,15 @@
             })
               .then((response) => {
                 if (response.data.status === 1) {
-                  alert("중복 된 아이디입니다.");    
+                  alert("이미 사용 중인 아이디입니다.");
+                  idChk.value = "";
+                  console.log(idChk);
                 } else {
                   alert("사용 가능한 아이디입니다.");
-                }
+                  idChk.value = "1";
+                  console.log(idChk);
+                  
+           		}
               })
               .catch((error) => {
                 console.log(error);
@@ -47,7 +54,7 @@
       
     function pwCheckFunction() {
     	var pw = document.getElementById("password").value;
-    	var checkPw = document.getElementById("checkPw").value;
+    	var checkPw = document.getElementById("checkPassword").value;
     	
     	// 비밀번호 영문+숫자+특수문자 조합 (8~15자리 입력) 정규식
     	var reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
@@ -110,8 +117,9 @@
 			
 			var id = $("#id").val();
 			var pw = $("#password").val();
-			var checkPw = $("#checkPw").val();
+			var checkPw = $("#checkPassword").val();
 			var name = $("#name").val();
+			var idChk = $("#idChk").val();
 			
 			if(id.length == 0){
 				alert("아이디를 입력 하세요.");
@@ -119,19 +127,25 @@
 				alert("비밀번호를 입력 하세요.");
 			} else if(checkPw.length == 0){
 				alert("비밀번호를 확인해주세요.");
+			} else if(checkPw != pw){
+				alert("비밀번호가 일치 하지 않습니다, 다시 확인 해주세요.");
 			} else if(name.length == 0){
 				alert("이름을 입력 하세요.");
+			} else if(idChk != 1){
+				alert("아이디 중복체크를 해주세요.");
 			} else {
 		    
 				$.ajax({
-				    type: "GET",
+				    type: "POST",
 				    url: "/insertMember",
-				    data: memberData,
+				    data: memberData,	
+				    	  idChk : idChk,
 				    dataType: "json",
 				    success:function(result) {
 				    	console.log(result);
 				    	var data = result.msg; // msg = 서버에서 받은  키 값 
 				    	console.log(data);
+
 				    	if(data == '회원가입 성공'){
 				    		 alert("회원가입 성공");
 				    		 location.href = "/product/list";
@@ -139,7 +153,14 @@
 				    		alert("비밀번호를 형식에 맞춰 작성해 주세요.");
 				    	} else if(data == '다시 시도 해주세요.') {
 				    		alert("다시 시도 해주세요.");
-				    	}
+				    	} else if(data == '아이디 중복체크를 해주세요.') {
+				    		alert("아이디 중복체크를 해주세요.");
+				    	} else if(data == '이미 사용중인 아이디입니다. 다시 중복체크를 진행해주세요.') {
+				    		alert("이미 사용중인 아이디입니다. 다시 중복체크를 진행해주세요.");
+				    	} else if(data == '비밀번호가 일치 하지 않습니다, 다시 확인 해주세요.') {
+				    		alert("비밀번호가 일치 하지 않습니다, 다시 확인 해주세요.");
+				    	} 
+				    	
 				    
 					},
 					error:function(xhr, ajaxOpts, thrownErr) {
@@ -157,6 +178,8 @@
   </head>
   <body>
     <form action="/register" method="get" name="joinForm" id="joinForm">
+    	<input type="hidden" name="idChk" id="idChk" value="">
+
 	    <main id="main">
 	      <div class="contentBody">
 	        <div class="subContent">
@@ -189,7 +212,7 @@
 	                  </dt>
 	                  <dd>
 	                    <div class="">
-	                      <input type="password" id="checkPw" name="checkPw" onkeyup="pwCheckFunction();" class="comInput" />
+	                      <input type="password" id="checkPassword" name="checkPassword" onkeyup="pwCheckFunction();" class="comInput" />
 	                      <span id="pwConfirm2"></span>
 	                    </div>
 	                  </dd>

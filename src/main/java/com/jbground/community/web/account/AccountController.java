@@ -91,11 +91,11 @@ public class AccountController {
     }
     
     @ResponseBody
-    @RequestMapping(value = "/insertMember", method = RequestMethod.GET)
-    public  Map<String, Object>  insertMember(HttpServletRequest request, ModelMap model, @ModelAttribute Member member) throws Exception {
+    @RequestMapping(value = "/insertMember", method = RequestMethod.POST)
+    public  Map<String, Object> insertMember(HttpServletRequest request, ModelMap model, @ModelAttribute Member member, @RequestParam int idChk) throws Exception {
     	Map<String, Object> map = new HashMap<>();
    
-    	String msg = accountService.insertMember(member);
+    	String msg = accountService.insertMember(member, idChk);
 
     	map.put("msg", msg);
     	
