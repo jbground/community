@@ -1,8 +1,12 @@
 package com.jbground.community.web.account;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jbground.community.model.Address;
 import com.jbground.community.model.Member;
+import com.jbground.community.model.common.ResponseStatus;
 import com.jbground.community.util.Common;
+
+import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -36,6 +40,8 @@ public class AccountController {
 
     @Resource(type = ObjectMapper.class)
     private ObjectMapper objectMapper;
+    
+    private int seq = 0;
 
     @RequestMapping(value = "/login")
     public String login(HttpServletRequest request, ModelMap model) throws Exception {
@@ -91,14 +97,23 @@ public class AccountController {
     }
     
     @ResponseBody
-    @RequestMapping(value = "/insertMember", method = RequestMethod.POST)
-    public  Map<String, Object> insertMember(HttpServletRequest request, ModelMap model, @ModelAttribute Member member, @RequestParam int idChk) throws Exception {
-    	Map<String, Object> map = new HashMap<>();
-   
-    	String msg = accountService.insertMember(member, idChk);
-
-    	map.put("msg", msg);
+    @RequestMapping(value = "/member/insert", method = RequestMethod.POST)
+    public ResponseStatus insertMember(HttpServletRequest request, ModelMap model, @ModelAttribute Member member, @ModelAttribute Address address) throws Exception {
+    	    	
+    	String msg = "";    
     	
-    	return map;
+    	ResponseStatus status = new ResponseStatus(0, msg);
+
+    	if(address.getZipcode() != null && !address.getZipcode().isEmpty() && address.getAdd1() != null && !address.getAdd1().isEmpty()) {
+    		seq++;
+    		address.setSeq(seq);
+    		// 여기서 주소 테이블 insert 했다 치고 ... 
+    		member.setAddress_seq(address.getSeq());
+    	}
+    	
+    	status = accountService.insertMember(member);
+   	
+    	
+    	return status;
     }
 }

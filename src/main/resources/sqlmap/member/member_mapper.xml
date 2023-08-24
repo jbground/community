@@ -20,10 +20,21 @@
     			, NAME
     			, PASSWORD
     			, REGISTER_DATE
+    			<if test="phone != null and phone != ''">
+    				, PHONE
+    			</if>	
+    			<if test="sex != null and sex != ''">
+    				, SEX
+    			</if>	
+    			<if test="email != null and email != ''">
+    				, EMAIL
+    			</if>
     			, IP
     			, LOGIN_DATE
     			, CHANGE_DATE
-    			, ADDRESS_SEQ
+    			<if test="address_seq != null and address_seq != ''">
+    				, ADDRESS_SEQ
+    			</if>
     			)
     		VALUES
 	    		(
@@ -31,10 +42,21 @@
 	    		, #{name}
 	    		, #{password}
 	    		, current_timestamp
+	    		<if test="phone != null and phone != ''">
+	    			, #{phone}
+	    		</if>
+	    		<if test="sex != null and sex != ''">
+	    			, #{sex}
+	    		</if>
+	    		<if test="email != null and email != ''">
+	    			, #{email}
+	    		</if>
 	    		, '127.0.0.1'
 	    		, current_timestamp
 	    		, current_timestamp
-	    		, 0
+	    		<if test="address_seq != null and address_seq != ''">
+	    			, #{address_seq}
+	    		</if>
 	    		)
     </insert>
 

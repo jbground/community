@@ -1,6 +1,7 @@
 package com.jbground.community.web.account;
 
 import com.jbground.community.model.Member;
+import com.jbground.community.model.common.ResponseStatus;
 import com.jbground.community.web.account.dao.MemberDao;
 import com.jbground.community.web.account.dao.MemberRepository;
 
@@ -22,7 +23,9 @@ public class AccountService {
     final int MIN = 8;
     final int MAX = 15;
     
-    final String REGEX =  "^((?=.*\\d)(?=.*[a-zA-Z])(?=.*[\\W]).{" + MIN + "," + MAX + "})$";
+    final String PW_REGEX =  "^((?=.*\\d)(?=.*[a-zA-Z])(?=.*[\\W]).{" + MIN + "," + MAX + "})$";
+    final String EMAIL_REGEX ="^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" +"(?:[a-zA-Z0-9-]+\\.)+[a-z" +"A-Z]{2,7}$";
+    final String PHONE_REGEX ="^01(?:0|1|[6-9])-(?:\\d{3}|\\d{4})-(\\d{4})$"; 
     
     @Resource(type = MemberRepository.class)
     private MemberRepository memberRepository;
@@ -43,40 +46,59 @@ public class AccountService {
     	
     }
     
-    public String insertMember(Member member, int idChk) {
+    public ResponseStatus insertMember(Member member) {    
     	
-
-	    Pattern pattern_symbol = Pattern.compile(REGEX);
+    	String msg = "";
+    	
+    	ResponseStatus status = new ResponseStatus(0, msg);
+    	
+    	// 비밀번호 유효성 체크
+	    Pattern pattern_pw = Pattern.compile(PW_REGEX);	    
+	    Matcher matcher_pw = pattern_pw.matcher(member.getPassword());
 	    
-	    Matcher matcher_symbol = pattern_symbol.matcher(member.getPassword());
+	    // 이메일 유효성 체크
+	    Pattern pattern_email = Pattern.compile(EMAIL_REGEX);
+    	Matcher matcher_email = pattern_email.matcher(member.getEmail());
+        
+        // 핸드폰번호 유효성 체크
+	    Pattern pattern_phone = Pattern.compile(PHONE_REGEX);
+        Matcher matcher_phone = pattern_phone.matcher(member.getPhone());
+	    
 	    
 	    int result = memberDao.checkId(member.getId());
-    	
-	    if(!(member.getId().isEmpty() || member.getId() == null)) {    	
-	    	if(matcher_symbol.find()) {
-	    		if(member.getPassword().equals(member.getCheckPassword())) {
-		    		if(result == 0) {
-		    			if(idChk == 1) {
-				    		memberDao.insertMember(member);
-				    		return "회원가입 성공";
-		    			} else {
-		    				return "아이디 중복체크를 해주세요.";
-		    			}
-		    		} else {
-		    			return "이미 사용중인 아이디입니다. 다시 중복체크를 진행해주세요.";
-		    		}
-	    		} else {
-	    			return "비밀번호가 일치 하지 않습니다, 다시 확인 해주세요.";
-	    		}
-	    		
-	    	} else {
-	    		return "비밀번호를 형식에 맞춰 작성해 주세요.";
-	    	}
-	    } 	    
 	    
-		
-	    return "다시 시도 해주세요.";
-    
+	   
+	    if(!matcher_pw.find()) {
+	    	return status = new ResponseStatus(0, "비밀번호를 형식에 맞춰 작성해 주세요.");
+	    }
+
+
+	    if(member.getEmail() != null && member.getEmail() != ""){
+	    	if(!matcher_email.find()) {
+	    		return status = new ResponseStatus(0, "이메일 형식에 맞춰 작성해 주세요.");
+	    	}
+	    }
+	    
+	    if(member.getPhone() != null && member.getPhone() != "") {
+		    if(!matcher_phone.find()) {
+		    	return status = new ResponseStatus(0, "전화번호 형식에 맞춰 작성해 주세요.");
+		    }
+	    }
+	    
+	    if(result == 1) {
+	    	return status = new ResponseStatus(0, "이미 사용중인 아이디입니다, 중복체크를 진행해주세요.");
+	    }
+	    
+	    if(!member.getPassword().equals(member.getCheckPassword())) {
+	    	return status = new ResponseStatus(0, "비밀번호가 일치 하지 않습니다, 다시 확인 해주세요.");
+	    }	    
+	    
+	    
+	    memberDao.insertMember(member); 
+	    
+	    return status = new ResponseStatus(1, "회원가입 성공");
+	    
+
     }
     
 }

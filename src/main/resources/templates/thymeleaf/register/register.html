@@ -36,7 +36,7 @@
               .then((response) => {
                 if (response.data.status === 1) {
                   alert("이미 사용 중인 아이디입니다.");
-                  idChk.value = "";
+                  idChk.value = "0";
                   console.log(idChk);
                 } else {
                   alert("사용 가능한 아이디입니다.");
@@ -55,29 +55,64 @@
     function pwCheckFunction() {
     	var pw = document.getElementById("password").value;
     	var checkPw = document.getElementById("checkPassword").value;
-    	
+    
     	// 비밀번호 영문+숫자+특수문자 조합 (8~15자리 입력) 정규식
-    	var reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+    	var reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;   	
     	
-    	if(!reg.test(pw)){
-    		document.getElementById('pwConfirm1').innerHTML='비밀번호는 영문자+숫자+특수문자 조합으로 8~15자리 까지 입력하세요.';
-            document.getElementById('pwConfirm1').style.color='red';
+    	// 비밀번호 유효성 체크
+    	if(!reg.test(pw) && !pw.length == 0){
+    		document.getElementById('pwConfirm').innerHTML='비밀번호는 영문자+숫자+특수문자 조합으로 8~15자리 까지 입력하세요.';
+            document.getElementById('pwConfirm').style.color='red';
     	} else {
-    		document.getElementById('pwConfirm1').innerHTML='';
+    		document.getElementById('pwConfirm').innerHTML='';
     		
     		if(!checkPw.length == 0){
 	       		if(pw != checkPw){
-	           		document.getElementById('pwConfirm2').innerHTML='비밀번호가 일치하지 않습니다.';
-	                document.getElementById('pwConfirm2').style.color='red';
+	           		document.getElementById('checkPwConfirm').innerHTML='비밀번호가 일치하지 않습니다.';
+	                document.getElementById('checkPwConfirm').style.color='red';
 	           	} else {
-	           		document.getElementById('pwConfirm2').innerHTML='비밀번호가 일치합니다.';
-	    	        document.getElementById('pwConfirm2').style.color='green';
+	           		document.getElementById('checkPwConfirm').innerHTML='비밀번호가 일치합니다.';
+	    	        document.getElementById('checkPwConfirm').style.color='green';
 	           	}
+    		} else {
+    			document.getElementById('checkPwConfirm').innerHTML='';
     		}	
 
     	}	
     	
 	}
+    
+    function emailCheckFunction(){
+    	var email = document.getElementById("email").value;
+    	
+    	// 이메일 검증 정규식
+    	var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+    	
+    	// 이메일 유효성 체크
+    	if(!reg_email.test(email) && !email.length == 0){
+    		document.getElementById('emailConfirm').innerHTML='이메일 형식이 올바르지 않습니다.';
+    		document.getElementById('emailConfirm').style.color='red';
+    	} else {
+    		document.getElementById('emailConfirm').innerHTML='';
+    	}
+    }
+    
+    function phoneCheckFunction(){
+    	var phone = document.getElementById("phone").value;
+    	
+    	// 휴대폰 검증 정규식
+    	var reg_phone = /01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}/;
+    	
+    	if(!reg_phone.test(phone) && !phone.length == 0){
+    		document.getElementById('phoneConfirm').innerHTML='전화번호 형식이 올바르지 않습니다.';
+    		document.getElementById('phoneConfirm').style.color='red';
+    	} else{
+    		document.getElementById('phoneConfirm').innerHTML='';
+    	}
+    	
+    }
+    
+    
 
 		
 	$(document).ready(function(){
@@ -120,7 +155,8 @@
 			var checkPw = $("#checkPassword").val();
 			var name = $("#name").val();
 			var idChk = $("#idChk").val();
-			
+			var email = $("#email").val(); 
+
 			if(id.length == 0){
 				alert("아이디를 입력 하세요.");
 			} else if(pw.length == 0){
@@ -137,29 +173,19 @@
 		    
 				$.ajax({
 				    type: "POST",
-				    url: "/insertMember",
+				    url: "/member/insert",
 				    data: memberData,	
-				    	  idChk : idChk,
 				    dataType: "json",
 				    success:function(result) {
 				    	console.log(result);
-				    	var data = result.msg; // msg = 서버에서 받은  키 값 
-				    	console.log(data);
-
-				    	if(data == '회원가입 성공'){
-				    		 alert("회원가입 성공");
-				    		 location.href = "/product/list";
-				    	} else if(data == '비밀번호를 형식에 맞춰 작성해 주세요.') {
-				    		alert("비밀번호를 형식에 맞춰 작성해 주세요.");
-				    	} else if(data == '다시 시도 해주세요.') {
-				    		alert("다시 시도 해주세요.");
-				    	} else if(data == '아이디 중복체크를 해주세요.') {
-				    		alert("아이디 중복체크를 해주세요.");
-				    	} else if(data == '이미 사용중인 아이디입니다. 다시 중복체크를 진행해주세요.') {
-				    		alert("이미 사용중인 아이디입니다. 다시 중복체크를 진행해주세요.");
-				    	} else if(data == '비밀번호가 일치 하지 않습니다, 다시 확인 해주세요.') {
-				    		alert("비밀번호가 일치 하지 않습니다, 다시 확인 해주세요.");
-				    	} 
+				    	console.log(result.status);
+				    	console.log(result.message);
+				    	if(result.staus == 1){
+				    		alert(result.message);
+				    		location.href = "/product/list";
+				    	} else {
+				    		alert(result.message);
+				    	}
 				    	
 				    
 					},
@@ -178,8 +204,8 @@
   </head>
   <body>
     <form action="/register" method="get" name="joinForm" id="joinForm">
-    	<input type="hidden" name="idChk" id="idChk" value="">
-
+    	<input type="hidden" name="idChk" id="idChk" value="0">
+		
 	    <main id="main">
 	      <div class="contentBody">
 	        <div class="subContent">
@@ -202,7 +228,7 @@
 	                  <dd>
 	                    <div class="">
 	                      <input type="password" id="password"  name="password"  onkeyup="pwCheckFunction();"  class="comInput" />
-	                      <span id="pwConfirm1"></span>
+	                      <span id="pwConfirm"></span>
 	                    </div>
 	                  </dd>
 	                </dl>
@@ -213,7 +239,7 @@
 	                  <dd>
 	                    <div class="">
 	                      <input type="password" id="checkPassword" name="checkPassword" onkeyup="pwCheckFunction();" class="comInput" />
-	                      <span id="pwConfirm2"></span>
+	                      <span id="checkPwConfirm"></span>
 	                    </div>
 	                  </dd>
 	                </dl>
@@ -263,16 +289,11 @@
 	                  <dd>
 	                    <div class="formRadio flex ai">
 	                      <div>
-	                        <input
-	                          type="radio"
-	                          id="c1"
-	                          value=""
-	                          checked
-	                        />
+	                        <input type="radio" id="M" name="sex" th:value="M" checked />
 	                        <label for="c1"> 남성 </label>
 	                      </div>
 	                      <div>
-	                        <input type="radio" id="c2"  value="" />
+	                        <input type="radio" id="F"  name="sex" th:value="F" />
 	                        <label for="c2"> 여성 </label>
 	                      </div>
 	                    </div>
@@ -282,7 +303,8 @@
 	                  <dt><label for="a5">휴대폰 번호</label></dt>
 	                  <dd>
 	                    <div class="">
-	                      <input type="text" id="a5" class="comInput" />
+	                      <input type="text" id="phone" name="phone" class="comInput" onkeyup="phoneCheckFunction();" placeholder="010-0000-0000"/>
+	                      <span id="phoneConfirm"></span>
 	                    </div>
 	                  </dd>
 	                </dl>
@@ -292,9 +314,10 @@
 	                    <div class="flex gap8">
 	                      <input
 	                        type="text"
-	                        id="zip-code"
+	                        id="zipcode"
+	                        name="zipcode"
 	                        class="comInput"
-	                        placeholder="우편번호"
+	                        placeholder="우편번호" 
 	                        readonly
 	                      />
 	                      <input
@@ -307,14 +330,16 @@
 	                    <div>
 	                      <input
 	                        type="text"
-	                        id="address-1"
+	                        id="add1"
+	                        name="add1"
 	                        class="comInput roadname"
 	                        placeholder="도로명주소"
 	                        readonly
 	                      />
 	                      <input
 	                        type="text"
-	                        id="address-2"
+	                        id="add2"
+	                        name="add2"
 	                        class="comInput"
 	                        placeholder="상세주소"
 	                      />
@@ -325,7 +350,8 @@
 	                  <dt><label for="a6">이메일</label></dt>
 	                  <dd>
 	                    <div class="">
-	                      <input type="text" id="a6" class="comInput" />
+	                      <input type="text" id="email" name="email" onkeyup="emailCheckFunction();" class="comInput" />
+	                      <span id="emailConfirm"></span>
 	                    </div>
 	                  </dd>
 	                </dl>
@@ -344,9 +370,9 @@
       function execDaumPostcode() {
         new daum.Postcode({
           oncomplete: function (data) {
-            document.getElementById("zip-code").value = data.zonecode;
-            document.getElementById("address-1").value = data.address;
-            document.getElementById("address-2").focus();
+            document.getElementById("zipcode").value = data.zonecode;
+            document.getElementById("add1").value = data.address;
+            document.getElementById("add2").focus();
           },
         }).open();
       }
