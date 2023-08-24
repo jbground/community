@@ -45,15 +45,7 @@ public class AccountController {
 
     @RequestMapping(value = "/login")
     public String login(HttpServletRequest request, ModelMap model) throws Exception {
-        List<Member> all = accountService.getMembers();
-        for (Member m : all) {
-            logger.info(Common.findObjectAddress(m));
-        }
 
-        List<Member> all2 = accountService.getMembers2();
-        for (Member m : all2) {
-            logger.info(Common.findObjectAddress(m));
-        }
         return "thymeleaf/login/login";
     }
 
