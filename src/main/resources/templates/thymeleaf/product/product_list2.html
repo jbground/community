@@ -15,6 +15,10 @@
         <script src="/assets/js/util.js"></script>
         <script src="/assets/js/main.js"></script>
         <script>
+            $(function (){
+                renderPagination(0);
+            });
+
             function renderPagination(currentPage) {
 
                 $.ajax({
@@ -30,52 +34,80 @@
                         console.log(success.totalElements);
                         console.log(success.number);
 
-                        for(let i = 0 ; i <5 ; i ++){
-                            console.log(success.content[i].seq);
-                            console.log(success.content[i].title);
-                            console.log(success.content[i].desc);
-                            console.log(success.content[i].image);
+                        //기존 row element 밑에 있는 자식 노드 모두 삭제
+                        const parent = document.getElementById('row');
+                        while (parent.firstChild) {
+                            parent.firstChild.remove();
                         }
-                        // 현재 게시물의 전체 개수가 20개 이하면 pagination을 숨깁니다.
-                        // if (_totalCount <= 20) return;
-                        //
-                        // var totalPage = Math.ceil(_totalCount / 20);
-                        // var pageGroup = Math.ceil(currentPage / 10);
-                        //
-                        // var last = pageGroup * 10;
-                        // if (last > totalPage) last = totalPage;
-                        // var first = last - (10 - 1) <= 0 ? 1 : last - (10 - 1);
-                        //
-                        // const fragmentPage = document.createDocumentFragment();
-                        // if (prev > 0) {
-                        //     var allpreli = document.createElement('li');
-                        //     allpreli.insertAdjacentHTML("beforeend", `<a href='#js-bottom' id='allprev'>&lt;&lt;</a>`);
-                        //
-                        //     var preli = document.createElement('li');
-                        //     preli.insertAdjacentHTML("beforeend", `<a href='#js-ottom' id='prev'>&lt;</a>`);
-                        //
-                        //     fragmentPage.appendChild(allpreli);
-                        //     fragmentPage.appendChild(preli);
-                        // }
-                        //
-                        // for (var i = first; i <= last; i++) {
-                        //     const li = document.createElement("li");
-                        //     li.insertAdjacentHTML("beforeend", `<a href='#js-bottom' id='page-${i}' data-num='${i}'>${i}</a>`);
-                        //     fragmentPage.appendChild(li);
-                        // }
-                        //
-                        // if (last < totalPage) {
-                        //     var allendli = document.createElement('li');
-                        //     allendli.insertAdjacentHTML("beforeend", `<a href='#js-bottom'  id='allnext'>&gt;&gt;</a>`);
-                        //
-                        //     var endli = document.createElement('li');
-                        //     endli.insertAdjacentHTML("beforeend", `<a  href='#js-bottom'  id='next'>&gt;</a>`);
-                        //
-                        //     fragmentPage.appendChild(endli);
-                        //     fragmentPage.appendChild(allendli);
-                        // }
-                        //
-                        // document.getElementById('js-pagination').appendChild(fragmentPage);
+
+                        //새로운 자식노드를 추가하기 위한 fragment 생성
+                        const fragment = document.createDocumentFragment();
+                        for(let i = 0 ; i <success.content.length ; i ++){
+
+                            var box_div = document.createElement('div');
+                            box_div.className = 'col-4 col-12-medium';
+
+
+                            var section = document.createElement('section');
+                            section.className = 'box feature';
+                            box_div.appendChild(section);
+
+                            var image = document.createElement('a');
+                            image.className = 'image featured';
+                            image.href = '#';
+                            image.insertAdjacentHTML("beforeend", `<img src='/images/sample.png' alt=''>`);
+                            section.appendChild(image);
+
+                            var inner_div = document.createElement('div');
+                            inner_div.className = 'inner';
+                            var inner_header = document.createElement('header');
+
+                            var inner_h2 = document.createElement('h2');
+                            inner_h2.innerText = success.content[i].title;
+                            inner_div.appendChild(inner_h2);
+                            var inner_p = document.createElement('p');
+                            inner_p.innerText = success.content[i].desc;
+                            inner_div.appendChild(inner_p);
+
+                            inner_div.appendChild(inner_header);
+
+                            var inner_price = document.createElement('p');
+                            inner_price.innerText = '가격 : ' + success.content[i].price;
+                            inner_div.appendChild(inner_price);
+                            var inner_stock = document.createElement('p');
+                            inner_stock.innerText = '수량 : ' + success.content[i].stock;
+                            inner_div.appendChild(inner_stock);
+                            section.appendChild(inner_div);
+
+                            fragment.appendChild(box_div);
+
+                        }
+
+                        document.getElementById('row').appendChild(fragment);
+
+                        //페이지네이션 항목 자동 생성
+                        var prev = success.number-1 <= 0 ? 0 : success.number-1;
+                        var next = success.number+1 >= success.totalPages-1 ? success.totalPages-1 : success.number+1;
+
+                        const fragmentPage = document.getElementById('pagination');
+                        while (fragmentPage.firstChild) {
+                            fragmentPage.firstChild.remove();
+                        }
+
+                        fragmentPage.insertAdjacentHTML("beforeend", `<a href='javascript:renderPagination(0);' class="first" id='first'>&lt;&lt;</a>`);
+                        fragmentPage.insertAdjacentHTML("beforeend", `<a href='javascript:renderPagination(${prev});' class="prev" id='prev'>&lt;</a>`);
+
+                        for (var i = 0; i < success.totalPages; i++) {
+                            if(success.number === i){
+                                fragmentPage.insertAdjacentHTML("beforeend", `<a href='javascript:renderPagination(${i});' class="current" data-num='${i}'>${i+1}</a>`);
+                            }else{
+                                fragmentPage.insertAdjacentHTML("beforeend", `<a href='javascript:renderPagination(${i});' class="num" data-num='${i}'>${i+1}</a>`);
+                            }
+
+                        }
+
+                        fragmentPage.insertAdjacentHTML("beforeend", `<a href='javascript:renderPagination(${next});' class="next" id='next'>&gt;</a>`);
+                        fragmentPage.insertAdjacentHTML("beforeend", `<a href='javascript:renderPagination(${success.totalPages-1});' class="last" id='last'>&gt;&gt;</a>`);
 
 
                     },
@@ -137,7 +169,7 @@
 	
     <div id="features-wrapper">
         <div class="container">
-            <div class="row">
+            <div id="row" class="row">
                 <div class="col-4 col-12-medium">
                     <!-- Box -->
                     <section class="box feature">
@@ -152,58 +184,10 @@
                         </div>
                     </section>
                 </div>
-                <div class="col-4 col-12-medium">
-
-                    <!-- Box -->
-                    <section class="box feature">
-                        <a href="#" class="image featured"><img src="/images/sample.png" alt="" /></a>
-                        <div class="inner">
-                            <header>
-                                <h2>상품2</h2>
-                                <p>상품설명</p>
-                            </header>
-                            <p>가격 : 40,000원</p>
-                            <p>수량 : 4</p>
-                        </div>
-                    </section>
-
-                </div>
-                <div class="col-4 col-12-medium">
-
-                    <!-- Box -->
-                    <section class="box feature">
-                        <a href="#" class="image featured"><img src="/images/sample.png" alt="" /></a>
-                        <div class="inner">
-                            <header>
-                                <h2>상품3</h2>
-                                <p>상품설명</p>
-                            </header>
-                            <p>가격 : 40,000원</p>
-                            <p>수량 : 4</p>
-                        </div>
-                    </section>
-
-                </div>
-                <div class="col-4 col-12-medium">
-
-                    <!-- Box -->
-                    <section class="box feature">
-                        <a href="#" class="image featured"><img src="/images/sample.png" alt="" /></a>
-                        <div class="inner">
-                            <header>
-                                <h2>상품4</h2>
-                                <p>상품설명</p>
-                            </header>
-                            <p>가격 : 40,000원</p>
-                            <p>수량 : 4</p>
-                        </div>
-                    </section>
-
-                </div>
             </div>
         </div>
-        <button onclick="renderPagination(1)"></button>
-        <div id="pagination"></div>
+        <div id="pagination">
+        </div>
     </div>
 
 </body>
