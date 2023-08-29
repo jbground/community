@@ -55,7 +55,7 @@
 	    		, current_timestamp
 	    		, current_timestamp
 	    		<if test="address_seq != null and address_seq != ''">
-	    			, #{address_seq}
+	    			,#{address_seq}
 	    		</if>
 	    		)
     </insert>

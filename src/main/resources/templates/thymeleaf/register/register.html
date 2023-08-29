@@ -156,6 +156,7 @@
 			var name = $("#name").val();
 			var idChk = $("#idChk").val();
 			var email = $("#email").val(); 
+			var url = 'localhost:8080/login';
 
 			if(id.length == 0){
 				alert("아이디를 입력 하세요.");
@@ -180,9 +181,9 @@
 				    	console.log(result);
 				    	console.log(result.status);
 				    	console.log(result.message);
-				    	if(result.staus == 1){
+				    	if(result.status == 1){
 				    		alert(result.message);
-				    		location.href = "/product/list";
+				    		location.replace("/login");
 				    	} else {
 				    		alert(result.message);
 				    	}
@@ -203,7 +204,7 @@
     </script>
   </head>
   <body>
-    <form action="/register" method="get" name="joinForm" id="joinForm">
+    <form name="joinForm" id="joinForm">
     	<input type="hidden" name="idChk" id="idChk" value="0">
 		
 	    <main id="main">

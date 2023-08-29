@@ -5,6 +5,7 @@ import com.jbground.community.model.Address;
 import com.jbground.community.model.Member;
 import com.jbground.community.model.common.ResponseStatus;
 import com.jbground.community.util.Common;
+import com.jbground.community.web.address.AddressService;
 
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
@@ -37,6 +38,9 @@ public class AccountController {
 
     @Resource(type = AccountService.class)
     private AccountService accountService;
+    
+    @Resource(type = AddressService.class)
+    private AddressService addressService;
 
     @Resource(type = ObjectMapper.class)
     private ObjectMapper objectMapper;
@@ -96,15 +100,15 @@ public class AccountController {
     	
     	ResponseStatus status = new ResponseStatus(0, msg);
 
-    	if(address.getZipcode() != null && !address.getZipcode().isEmpty() && address.getAdd1() != null && !address.getAdd1().isEmpty()) {
-    		seq++;
-    		address.setSeq(seq);
-    		// 여기서 주소 테이블 insert 했다 치고 ... 
+
+    	int seq =  addressService.insertAddress(address);
+
+    	if(seq != 0) {
     		member.setAddress_seq(address.getSeq());
     	}
+
     	
     	status = accountService.insertMember(member);
-   	
     	
     	return status;
     }

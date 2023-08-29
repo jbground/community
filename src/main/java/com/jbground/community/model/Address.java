@@ -1,24 +1,13 @@
 package com.jbground.community.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "Address")
 public class Address {
 	
-	@Id
 	private int seq;
 
-	@Column
 	private String zipcode;
 
-	@Column
 	private String add1;
 
-	@Column
 	private String add2;
 
 	
