@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * 메인화면
@@ -20,8 +21,10 @@ public class IndexController {
 
 
     @RequestMapping(value = "/main")
-    public String index(HttpServletRequest request, ModelMap model) throws Exception {
+    public String index(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception {
 
+
+    	model.addAttribute("member", session.getAttribute("member"));
 
         return "thymeleaf/index";
     }

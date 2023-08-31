@@ -53,6 +53,9 @@ public class AccountController {
         return "thymeleaf/login/login";
     }
     
+    /**
+     *  로그인 기능
+     */
     @ResponseBody
     @RequestMapping(value = "/check/login", method = RequestMethod.POST)
     public ResponseStatus checkLogin(HttpServletRequest request, ModelMap model, @ModelAttribute Member member, HttpSession session) throws Exception {
@@ -69,6 +72,19 @@ public class AccountController {
 
         return status;
     }
+    
+    
+    /**
+     *  로그아웃 기능 
+     */
+    @ResponseBody
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public void logout(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception {
+    	
+    	session.invalidate();
+
+    }
+    
     
     /**
      * 회원 가입
