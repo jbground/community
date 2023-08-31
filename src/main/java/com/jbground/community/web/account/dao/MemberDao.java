@@ -10,4 +10,6 @@ public interface MemberDao {
     List<Member> getMembers();
     int checkId(String id);
     void insertMember(Member member);
+    int checkLogin(Member member);
+
 }

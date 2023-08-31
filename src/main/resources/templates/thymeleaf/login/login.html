@@ -6,30 +6,65 @@
 >
   <head>
     <meta charset="UTF-8" />
+    <title>로그인 페이지</title>
     <link rel="stylesheet" href="/css/login.css" />
-    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script type="text/javascript">    
+	    $(document).ready(function(){	
+	    	
+	    	$("#loginBtn").click(function(){
+	    		var id =  $("#id").val();
+	    		var pw = $("#password").val();
+	    		console.log(id);
+	    		
+	    		if(id.length == 0){
+	    			alert("아이디를 입력하세요.");
+	    		} else if(pw.length == 0){
+	    			alert("비밀번호를 입력하세요.");
+	    		} else {
+	    			
+	    			$.ajax({
+		    			type: "POST",
+		    			url: "/check/login",
+		    			data: {
+		    				id : id,
+		    				password : pw
+		    			},
+		    			dateType: "json",
+		    			success:function(result){
+		    				console.log(result);
+		    				console.log(result.status);
+		    				console.log(result.message);
+		    				if(result.status == 1){
+					    		alert(result.message);
+					    		location.href="/main";
+					    	} else {
+					    		alert(result.message);
+					    	}
+		    			}
+		    			
+		    		});
+	    			
+	    		}
+	    		
+	    		
+	    	}); 
+
+	    });
+	      	
+ 
+    </script> 
   </head>
   <body>
     <div class="wrapper">
       <div class="container">
         <div class="sign-in-container">
-          <form>
+          <form id="loginForm">
             <h1>Sign In</h1>
-            <!-- <div class="social-links">
-                <div>
-                  <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                </div>
-                <div>
-                  <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                </div>
-                <div>
-                  <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                </div>
-              </div> -->
-            <!-- <span>or use your account</span> -->
-            <input type="email" placeholder="ID" />
-            <input type="password" placeholder="Password" />
-            <button class="form_btn">Sign In</button>
+            <input type="text" placeholder="ID"  id="id" name="id"/>
+            <input type="password" placeholder="Password" id="password" name="password"/>
+            <button class="form_btn" type="button" id="loginBtn">Sign In</button>
           </form>
         </div>
         <div class="overlay-container">

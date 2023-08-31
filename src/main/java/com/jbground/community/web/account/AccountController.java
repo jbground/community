@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,15 +46,30 @@ public class AccountController {
 
     @Resource(type = ObjectMapper.class)
     private ObjectMapper objectMapper;
-    
-    private int seq = 0;
 
     @RequestMapping(value = "/login")
     public String login(HttpServletRequest request, ModelMap model) throws Exception {
 
         return "thymeleaf/login/login";
     }
+    
+    @ResponseBody
+    @RequestMapping(value = "/check/login", method = RequestMethod.POST)
+    public ResponseStatus checkLogin(HttpServletRequest request, ModelMap model, @ModelAttribute Member member, HttpSession session) throws Exception {
+    	
+    	String msg = "";    
 
+    	ResponseStatus status = new ResponseStatus(0, msg);
+
+    	status = accountService.checkLogin(member);
+
+    	if(status.getStatus() == 1) {
+    		session.setAttribute("member", member);
+    	}
+
+        return status;
+    }
+    
     /**
      * 회원 가입
      */

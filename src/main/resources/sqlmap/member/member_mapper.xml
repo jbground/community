@@ -7,9 +7,20 @@
     </select>
     
     <select id="checkId" resultType="int" parameterType="String">
-        SELECT COUNT(*) FROM MEMBER
-        	WHERE
-        ID = #{id}	
+        SELECT 
+        	COUNT(*) 
+       	FROM 
+       		MEMBER
+       	WHERE ID = #{id}	
+    </select>
+    
+    <select id="checkLogin" resultType="int" parameterType="com.jbground.community.model.Member">
+    	SELECT 
+    		COUNT(*)
+    	FROM
+    		MEMBER
+    	WHERE ID = #{id}
+    		  AND  PASSWORD = #{password}
     </select>
     
     <insert id="insertMember" parameterType="com.jbground.community.model.Member">
