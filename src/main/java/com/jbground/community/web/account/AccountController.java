@@ -125,8 +125,11 @@ public class AccountController {
         response.getWriter().print(objectMapper.writeValueAsString(map));
     }
     
+    /**
+     * 회원 가입 기능 
+     */
     @ResponseBody
-    @RequestMapping(value = "/member/insert", method = RequestMethod.POST)
+    @RequestMapping(value = "/members", method = RequestMethod.POST)
     public ResponseStatus insertMember(HttpServletRequest request, ModelMap model, @ModelAttribute Member member, @ModelAttribute Address address) throws Exception {
     	    	
     	String msg = "";    
