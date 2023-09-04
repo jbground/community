@@ -130,7 +130,7 @@ public class AccountController {
      */
     @ResponseBody
     @RequestMapping(value = "/members", method = RequestMethod.POST)
-    public ResponseStatus insertMember(HttpServletRequest request, ModelMap model, @ModelAttribute Member member, @ModelAttribute Address address) throws Exception {
+    public ResponseStatus insertMember(HttpServletRequest request, @ModelAttribute Member member, @ModelAttribute Address address) throws Exception {
     	    	
     	String msg = "";    
     	
