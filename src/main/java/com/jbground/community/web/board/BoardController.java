@@ -43,7 +43,7 @@ public class BoardController {
      */  
     @ResponseBody
     @RequestMapping(value= "/board/{id}", method = RequestMethod.POST)
-    public ResponseStatus insertBoard(HttpServletRequest request, ModelMap model, @ModelAttribute Board board) throws Exception{
+    public ResponseStatus insertBoard(HttpServletRequest request, @ModelAttribute Board board) throws Exception{
 		
     	String msg = "";    
     	ResponseStatus status = new ResponseStatus(0, msg);
@@ -57,7 +57,7 @@ public class BoardController {
      */  
     @ResponseBody
     @RequestMapping(value = "/board/{id}", method = RequestMethod.PUT)
-    public ResponseStatus updateBoard(HttpServletRequest request, ModelMap model, @ModelAttribute Board board) throws Exception{
+    public ResponseStatus updateBoard(HttpServletRequest request, @ModelAttribute Board board) throws Exception{
 		
     	String msg = "";    
     	ResponseStatus status = new ResponseStatus(0, msg);
@@ -71,7 +71,7 @@ public class BoardController {
      */ 
     @ResponseBody
     @RequestMapping(value = "/board/{id}", method = RequestMethod.DELETE)
-    public ResponseStatus deleteBoard(HttpServletRequest request, ModelMap model, @ModelAttribute Board board) throws Exception{
+    public ResponseStatus deleteBoard(HttpServletRequest request, @ModelAttribute Board board) throws Exception{
 		
     	String msg = "";    
     	ResponseStatus status = new ResponseStatus(0, msg);
