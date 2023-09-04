@@ -38,8 +38,11 @@ public class BoardController {
         return "thymeleaf/board/board_list";
     }
     
+    /*
+     * 게시판 글 생성
+     */  
     @ResponseBody
-    @RequestMapping(value= "/board/insert", method = RequestMethod.POST)
+    @RequestMapping(value= "/board/{id}", method = RequestMethod.POST)
     public ResponseStatus insertBoard(HttpServletRequest request, ModelMap model, @ModelAttribute Board board) throws Exception{
 		
     	String msg = "";    
@@ -49,9 +52,11 @@ public class BoardController {
     	
     }
     
-    
+    /*
+     * 게시판 글 수정
+     */  
     @ResponseBody
-    @RequestMapping(value = "/board/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/board/{id}", method = RequestMethod.PUT)
     public ResponseStatus updateBoard(HttpServletRequest request, ModelMap model, @ModelAttribute Board board) throws Exception{
 		
     	String msg = "";    
@@ -61,8 +66,11 @@ public class BoardController {
     	
     }
     
+    /*
+     * 게시판 글 삭제
+     */ 
     @ResponseBody
-    @RequestMapping(value = "/board/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/board/{id}", method = RequestMethod.DELETE)
     public ResponseStatus deleteBoard(HttpServletRequest request, ModelMap model, @ModelAttribute Board board) throws Exception{
 		
     	String msg = "";    
