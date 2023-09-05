@@ -7,76 +7,183 @@
   <head>
     <meta charset="UTF-8" />
     <title>로그인 페이지</title>
-    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="/css/login.css?after" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
     <script src="/assets/js/jquery.min.js"></script>
-    <script type="text/javascript">    
-	    $(document).ready(function(){	
-	    	
-	    	$("#loginBtn").click(function(){
-	    		var id =  $("#id").val();
-	    		var pw = $("#password").val();
-	    		console.log(id);
-	    		
-	    		if(id.length == 0){
-	    			alert("아이디를 입력하세요.");
-	    		} else if(pw.length == 0){
-	    			alert("비밀번호를 입력하세요.");
-	    		} else {
-	    			
-	    			$.ajax({
-		    			type: "POST",
-		    			url: "/check/login",
-		    			data: {
-		    				id : id,
-		    				password : pw
-		    			},
-		    			dateType: "json",
-		    			success:function(result){
-		    				console.log(result);
-		    				console.log(result.status);
-		    				console.log(result.message);
-		    				if(result.status == 1){
-					    		alert(result.message);
-					    		location.href="/main";
-					    	} else {
-					    		alert(result.message);
-					    	}
-		    			}
-		    			
-		    		});
-	    			
-	    		}
-	    		
-	    		
-	    	}); 
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#loginBtn").click(function () {
+          var id = $("#id").val();
+          var pw = $("#password").val();
+          console.log(id);
 
-	    });
-	      	
- 
-    </script> 
+          if (id.length == 0) {
+            alert("아이디를 입력하세요.");
+          } else if (pw.length == 0) {
+            alert("비밀번호를 입력하세요.");
+          } else {
+            $.ajax({
+              type: "POST",
+              url: "/check/login",
+              data: {
+                id: id,
+                password: pw,
+              },
+              dateType: "json",
+              success: function (result) {
+                console.log(result);
+                console.log(result.status);
+                console.log(result.message);
+                if (result.status == 1) {
+                  alert(result.message);
+                  location.href = "/main";
+                } else {
+                  alert(result.message);
+                }
+              },
+            });
+          }
+        });
+      });
+    </script>
   </head>
   <body>
-    <div class="wrapper">
-      <div class="container">
-        <div class="sign-in-container">
-          <form id="loginForm">
-            <h1>Sign In</h1>
-            <input type="text" placeholder="ID"  id="id" name="id"/>
-            <input type="password" placeholder="Password" id="password" name="password"/>
-            <button class="form_btn" type="button" id="loginBtn">Sign In</button>
-          </form>
+    <!-- header  -->
+    <div id="header-wrapper">
+      <header id="header" class="container">
+        <!-- Logo -->
+        <div id="logo">
+          <h1><a href="/main">Jbround</a></h1>
+          <span>by HTML5 UP</span>
         </div>
-        <div class="overlay-container">
-          <div class="overlay-right">
-            <h1>Hello, Friend</h1>
-            <p>Enter your personal details and start journey with us</p>
-            <a href="/register"
-              ><button id="signUp" class="overlay_btn">Sign Up</button></a
+
+        <!-- Nav -->
+        <nav id="nav">
+          <ul>
+            <li class="current" style="white-space: nowrap">
+              <a href="/login">Sign in</a>
+            </li>
+            <li
+              class="opener"
+              style="
+                user-select: none;
+                cursor: pointer;
+                white-space: nowrap;
+                opacity: 1;
+              "
             >
+              <a href="/product/list">Product</a>
+
+              <ul
+                class=""
+                style="user-select: none; display: none; position: absolute"
+              >
+                <li style="white-space: nowrap">
+                  <a href="#" style="display: block">Lorem ipsum dolor</a>
+                </li>
+                <li style="white-space: nowrap">
+                  <a href="#" style="display: block">Magna phasellus</a>
+                </li>
+                <li
+                  class="opener"
+                  style="
+                    user-select: none;
+                    cursor: pointer;
+                    white-space: nowrap;
+                  "
+                >
+                  <a href="#" style="display: block">Phasellus consequat</a>
+                  <ul
+                    class="dropotron"
+                    style="user-select: none; display: none; position: absolute"
+                  >
+                    <li style="white-space: nowrap">
+                      <a href="#" style="display: block">Lorem ipsum dolor</a>
+                    </li>
+                    <li style="white-space: nowrap">
+                      <a href="#" style="display: block">Phasellus consequat</a>
+                    </li>
+                    <li style="white-space: nowrap">
+                      <a href="#" style="display: block">Magna phasellus</a>
+                    </li>
+                    <li style="white-space: nowrap">
+                      <a href="#" style="display: block">Etiam dolore nisl</a>
+                    </li>
+                  </ul>
+                </li>
+                <li style="white-space: nowrap">
+                  <a href="#" style="display: block">Veroeros feugiat</a>
+                </li>
+              </ul>
+            </li>
+            <li style="white-space: nowrap">
+              <a href="/board/list">게시판</a>
+            </li>
+            <li style="white-space: nowrap">
+              <a href="right-sidebar.html">Right Sidebar</a>
+            </li>
+            <li style="white-space: nowrap">
+              <a href="no-sidebar.html">No Sidebar</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+    <!-- header eee   -->
+
+    <main id="main">
+      <div class="contentBody">
+        <!-- 컨텐츠가 들어갈 부분 -->
+        <div class="subContent">
+          <div class="subBody">
+            <!-- 서브 컨텐츠 들어가는 부분 -->
+            <div class="subcontent">
+              <div class="wrapperSign">
+                <div class="container">
+                  <div class="sign-in-container">
+                    <form>
+                      <h1>Sign In</h1>
+                      <!-- <div class="social-links">
+                          <div>
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                          </div>
+                          <div>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                          </div>
+                          <div>
+                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                          </div>
+                        </div> -->
+                      <!-- <span>or use your account</span> -->
+                      <input type="email" placeholder="ID" />
+                      <input type="password" placeholder="Password" />
+                      <button class="form_btn">Sign In</button>
+                    </form>
+                  </div>
+                  <div class="overlay-container">
+                    <div class="overlay-right">
+                      <h1>Hello, Friend</h1>
+                      <p>
+                        Enter your personal details and start journey with us
+                      </p>
+                      <a href="/register"
+                        ><button id="signUp" class="overlay_btn">
+                          Sign Up
+                        </button></a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
+
+    <!-- footer  -->
+
+    <!-- footer eee -->
   </body>
 </html>

@@ -1,0 +1,31 @@
+.boardWrap table th {
+  text-align: center;
+}
+.boardWrap table td {
+  text-align: center;
+}
+.boardWrap table tr {
+  border-top: solid 1px #fafafa !important;
+}
+.boardWrap table tr:last-child {
+  border-bottom: solid 1px #fafafa;
+}
+
+.boardWrap input {
+  width: 15px;
+  height: 15px;
+}
+.boardWrap .btnBox {
+  display: flex;
+  justify-content: space-between;
+}
+.boardWrap .btnBox button {
+  width: 72px;
+  height: 30px;
+  font-size: 12px;
+  background-color: #fc8b6e;
+}
+.boardWrap .btnBox .btnleft {
+  display: flex;
+  gap: 9px;
+}
