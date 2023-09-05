@@ -98,33 +98,6 @@ public class AccountService {
     }
     
     
-//    public ResponseStatus checkLogin(Member member) {
-//    	
-//    	if(member.getId() != null && !member.getId().isEmpty() && member.getPassword() != null && !member.getPassword().isEmpty()) {
-//    		// 아이디 체크
-//    		int checkId = memberDao.checkId(member.getId());
-//    		
-//    		if(checkId == 0) { // 아이디가 없으면 ...
-//    			return new ResponseStatus(0, "등록되지 않은 아이디 입니다.");   			
-//    		}
-//    		
-//    		// 아이디, 비밀번호 체크 
-//    		int result = memberDao.checkLogin(member);
-//			
-//			if(result == 0) {
-//				return new ResponseStatus(0, "비밀번호가 일치하지 않습니다.");
-//			} 
-//					
-//			return new ResponseStatus(1, "로그인 성공");
-//    		
-//    	}
-//		
-//    	
-//    	return new ResponseStatus(0, "로그인 실패");
-//    	
-//    }
-    
-    
     public ResponseStatus checkLogin(Member member) {
 
     	if(member.getId() != null && !member.getId().isEmpty() && member.getPassword() != null && !member.getPassword().isEmpty()) {
