@@ -7,91 +7,10 @@
     <title>게시판 상세 페이지</title>
   </head>
   <body>
-    <!-- header  -->
-    <div id="header-wrapper">
-      <header id="header" class="container">
-        <!-- Logo -->
-        <div id="logo">
-          <h1><a href="/main">Jbround</a></h1>
-          <span>by HTML5 UP</span>
-        </div>
 
-        <!-- Nav -->
-        <nav id="nav">
-          <ul>
-            <th:block th:if="${member == null}">
-				<li class="current"><a href="/login">Sign in</a></li>
-			</th:block>
-			<th:block th:unless="${member == null}">
-				<li class="current" id="logout"><a href="#">Sign out</a></li>
-			</th:block>
-            <li
-              class="opener"
-              style="
-                user-select: none;
-                cursor: pointer;
-                white-space: nowrap;
-                opacity: 1;
-              "
-            >
-              <a href="/product/list">Product</a>
-
-              <ul
-                class=""
-                style="user-select: none; display: none; position: absolute"
-              >
-                <li style="white-space: nowrap">
-                  <a href="#" style="display: block">Lorem ipsum dolor</a>
-                </li>
-                <li style="white-space: nowrap">
-                  <a href="#" style="display: block">Magna phasellus</a>
-                </li>
-                <li
-                  class="opener"
-                  style="
-                    user-select: none;
-                    cursor: pointer;
-                    white-space: nowrap;
-                  "
-                >
-                  <a href="#" style="display: block">Phasellus consequat</a>
-                  <ul
-                    class="dropotron"
-                    style="user-select: none; display: none; position: absolute"
-                  >
-                    <li style="white-space: nowrap">
-                      <a href="#" style="display: block">Lorem ipsum dolor</a>
-                    </li>
-                    <li style="white-space: nowrap">
-                      <a href="#" style="display: block">Phasellus consequat</a>
-                    </li>
-                    <li style="white-space: nowrap">
-                      <a href="#" style="display: block">Magna phasellus</a>
-                    </li>
-                    <li style="white-space: nowrap">
-                      <a href="#" style="display: block">Etiam dolore nisl</a>
-                    </li>
-                  </ul>
-                </li>
-                <li style="white-space: nowrap">
-                  <a href="#" style="display: block">Veroeros feugiat</a>
-                </li>
-              </ul>
-            </li>
-            <li style="white-space: nowrap">
-              <a href="/board/list">게시판</a>
-            </li>
-            <li style="white-space: nowrap">
-              <a href="right-sidebar.html">Right Sidebar</a>
-            </li>
-            <li style="white-space: nowrap">
-              <a href="no-sidebar.html">No Sidebar</a>
-            </li>
-          </ul>
-        </nav>
-      </header>
-    </div>
-    <!-- header eee   -->
+    <!-- header start -->
+    <div th:replace="~{thymeleaf/header :: headerFragment}"></div>	
+    <!-- header end -->
 
     <main id="main">
       <div class="contentBody">
@@ -139,101 +58,8 @@
       </div>
     </main>
 
-    <!-- footer  -->
-    <div id="footer-wrapper">
-      <footer id="footer" class="container">
-        <div class="row">
-          <div class="col-3 col-6-medium col-12-small">
-            <!-- Links -->
-            <section class="widget links">
-              <h3>Random Stuff</h3>
-              <ul class="style2">
-                <li><a href="#">Etiam feugiat condimentum</a></li>
-                <li><a href="#">Aliquam imperdiet suscipit odio</a></li>
-                <li><a href="#">Sed porttitor cras in erat nec</a></li>
-                <li><a href="#">Felis varius pellentesque potenti</a></li>
-                <li><a href="#">Nullam scelerisque blandit leo</a></li>
-              </ul>
-            </section>
-          </div>
-          <div class="col-3 col-6-medium col-12-small">
-            <!-- Links -->
-            <section class="widget links">
-              <h3>Random Stuff</h3>
-              <ul class="style2">
-                <li><a href="#">Etiam feugiat condimentum</a></li>
-                <li><a href="#">Aliquam imperdiet suscipit odio</a></li>
-                <li><a href="#">Sed porttitor cras in erat nec</a></li>
-                <li><a href="#">Felis varius pellentesque potenti</a></li>
-                <li><a href="#">Nullam scelerisque blandit leo</a></li>
-              </ul>
-            </section>
-          </div>
-          <div class="col-3 col-6-medium col-12-small">
-            <!-- Links -->
-            <section class="widget links">
-              <h3>Random Stuff</h3>
-              <ul class="style2">
-                <li><a href="#">Etiam feugiat condimentum</a></li>
-                <li><a href="#">Aliquam imperdiet suscipit odio</a></li>
-                <li><a href="#">Sed porttitor cras in erat nec</a></li>
-                <li><a href="#">Felis varius pellentesque potenti</a></li>
-                <li><a href="#">Nullam scelerisque blandit leo</a></li>
-              </ul>
-            </section>
-          </div>
-          <div class="col-3 col-6-medium col-12-small">
-            <!-- Contact -->
-            <section class="widget contact last">
-              <h3>Contact Us</h3>
-              <ul>
-                <li>
-                  <a href="#" class="icon brands fa-twitter"
-                    ><span class="label">Twitter</span></a
-                  >
-                </li>
-                <li>
-                  <a href="#" class="icon brands fa-facebook-f"
-                    ><span class="label">Facebook</span></a
-                  >
-                </li>
-                <li>
-                  <a href="#" class="icon brands fa-instagram"
-                    ><span class="label">Instagram</span></a
-                  >
-                </li>
-                <li>
-                  <a href="#" class="icon brands fa-dribbble"
-                    ><span class="label">Dribbble</span></a
-                  >
-                </li>
-                <li>
-                  <a href="#" class="icon brands fa-pinterest"
-                    ><span class="label">Pinterest</span></a
-                  >
-                </li>
-              </ul>
-              <p>
-                1234 Fictional Road<br />
-                Nashville, TN 00000<br />
-                (800) 555-0000
-              </p>
-            </section>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div id="copyright">
-              <ul class="menu">
-                <li>© Untitled. All rights reserved</li>
-                <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-
-    <!-- footer eee -->
+    <!-- Footer start -->
+	<div th:replace="~{thymeleaf/footer :: footerFragment}"></div>	
+	<!-- Footer end -->	
   </body>
 </html>

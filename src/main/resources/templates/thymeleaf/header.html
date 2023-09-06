@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<title>헤더</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="/assets/css/main.css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    	<script src="/assets/js/jquery.min.js"></script>
+    	<script type="text/javascript">
+    		
+    		$(document).ready(function(){
+    			
+    			$("#logout").click(function(){
+
+    				$.ajax({
+    				    type: "POST",
+    				    url: "/logout",
+    				    success:function(data){
+    		                /* alert("로그아웃 성공"); */
+    		                document.location.reload();     
+    		            } 
+    				}); 
+    				
+    			});
+    			
+    		});
+    	
+    	</script>
+	</head>
+	<body class="is-preload homepage">
+
+			<!-- Header -->
+			<div id="header-wrapper">
+				<header id="header" class="container" th:fragment="headerFragment">
+
+					<!-- Logo -->
+						<div id="logo">
+							<h1><a href="/main">Jbround</a></h1>
+							<span>by HTML5 UP</span>
+						</div>
+
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<th:block th:if="${member == null}">
+									<li class="current"><a href="/login">Sign in</a></li>
+								</th:block>
+								<th:block th:unless="${member == null}">
+									<li class="current" id="logout"><a href="#">Sign out</a></li>
+								</th:block>
+								<li>
+									<a href="/product/list">Product</a>
+									<ul>
+										<li><a href="#">Lorem ipsum dolor</a></li>
+										<li><a href="#">Magna phasellus</a></li>
+										<li>
+											<a href="#">Phasellus consequat</a>
+											<ul>
+												<li><a href="#">Lorem ipsum dolor</a></li>
+												<li><a href="#">Phasellus consequat</a></li>
+												<li><a href="#">Magna phasellus</a></li>
+												<li><a href="#">Etiam dolore nisl</a></li>
+											</ul>
+										</li>
+										<li><a href="#">Veroeros feugiat</a></li>
+									</ul>
+								</li>
+								<li><a href="/board/list">게시판</a></li>
+								<li><a href="right-sidebar.html">Right Sidebar</a></li>
+								<li><a href="no-sidebar.html">No Sidebar</a></li>
+							</ul>
+						</nav>
+
+				</header>
+			</div>
+
+		<!-- Scripts -->
+
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
