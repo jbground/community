@@ -19,9 +19,12 @@
         <!-- Nav -->
         <nav id="nav">
           <ul>
-            <li class="current" style="white-space: nowrap">
-              <a href="/login">Sign in</a>
-            </li>
+            <th:block th:if="${member == null}">
+				<li class="current"><a href="/login">Sign in</a></li>
+			</th:block>
+			<th:block th:unless="${member == null}">
+				<li class="current" id="logout"><a href="#">Sign out</a></li>
+			</th:block>
             <li
               class="opener"
               style="
@@ -125,7 +128,7 @@
                 <div class="btnBox">
                   <div class="btnleft">
                     <button>수정</button>
-                    <button>취소</button>
+                    <button onClick="location.href='/board/list'">취소</button>
                   </div>
                   <div class="btnRight"><button>글등록</button></div>
                 </div>

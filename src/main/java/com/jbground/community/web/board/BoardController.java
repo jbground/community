@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,17 +24,20 @@ public class BoardController {
 
 
     @RequestMapping(value = "/board/list")
-    public String showBoard(HttpServletRequest request, ModelMap model) throws Exception{
+    public String showBoard(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception{
 
         List<Board> boardList = boardService.getBoardList();
 
         model.addAttribute("boardList", boardList);
+        model.addAttribute("member", session.getAttribute("member"));
 
         return "thymeleaf/board/board_list";
     } 
     
     @RequestMapping(value = "/board/view")
-    public String showBoardView(HttpServletRequest request, ModelMap model) throws Exception{
+    public String showBoardView(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception{
+    	
+    	model.addAttribute("member", session.getAttribute("member"));
 
         return "thymeleaf/board/board_view";
     } 
