@@ -2,9 +2,21 @@
 <html xmlns:th="www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
+    <title>게시판</title>
     <link rel="stylesheet" href="/assets/css/main.css" />
     <link rel="stylesheet" href="/css/board.css" />
-    <title>Title</title>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.dropotron.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script type="text/javascript">
+    	
+
+    </script>
+   
   </head>
   <body>
     <!-- header  -->
@@ -98,66 +110,39 @@
             <!-- 서브 컨텐츠 들어가는 부분 -->
             <div class="subcontent">
               <div class="boardWrap">
-                <table>
+                <table style="width: 100%">
+                <colgroup> 
+				   <col width="5%" /> 
+				   <col width="10%" /> 
+				   <col width="15%" />
+				   <col width="25%" /> 
+				   <col width="15%" /> 
+				   <col width="15%" />
+				   <col width="15%" />
+                </colgroup>
                   <thead>
                     <tr>
+                      <th><input type="checkbox" name="chkAll" id="selectall"/></th>
                       <th>번호</th>
-                      <th><input type="checkbox" name="" value="" /></th>
                       <th>제목</th>
-                      <th>글쓴이</th>
-                      <th>날짜</th>
-                      <th>조회</th>
+                      <th>내용</th>
+                      <th>작성자</th>
+                      <th>등록일</th>
+                      <th>수정일</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>5</td>
+                    <tr th:each="item : ${boardList}"> 
                       <td>
-                        <input type="checkbox" name="" value="" />
+                        <input type="checkbox" name="chk" />
                       </td>
-                      <td class="oneLine">제목 test test test test</td>
-                      <td>관리자</td>
-                      <td>23.09.05</td>
-                      <td>3</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td><input type="checkbox" name="" value="" /></td>
-                      <td class="oneLine">
-                        제목 test test test test test test test test test test
-                        test test
-                      </td>
-                      <td>관리자2</td>
-                      <td>23.09.05</td>
-                      <td>3</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td><input type="checkbox" name="" value="" /></td>
-                      <td class="oneLine">
-                        제목 test test test test test test test test test test
-                        test test test
-                      </td>
-                      <td>관리자</td>
-                      <td>23.09.05</td>
-                      <td>3</td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td><input type="checkbox" name="" value="" /></td>
-                      <td class="oneLine"></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td><input type="checkbox" name="" value="" /></td>
-                      <td class="oneLine"></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
+                      <td th:text="${item.seq}">1</td>
+                      <td class="oneLine" th:text="${item.title}">제목입니다.</td>
+                      <td th:text="${item.content}">내용입니다 내용입니다 내용입니다 내용입니다 내용입니다 내용입니다 ...</td>
+                      <td th:text="${item.editor}">관리자</td>
+                      <td th:text="${item.edit_time}">23-09-05</td>
+                      <td th:text="${item.modify_time}">23-09-08</td>
+                    </tr>  
                   </tbody>
                 </table>
                 <div class="btnBox">

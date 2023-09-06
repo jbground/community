@@ -13,4 +13,8 @@ public class BoardDao extends AbstractMybatisMapper {
     public List<Board> getAllBoardList() throws Exception {
         return selectList("board.selectAllBoardList");
     }
+    
+    public List<Board> getBoardList() throws Exception {
+        return selectList("board.selectBoardList");
+    }
 }

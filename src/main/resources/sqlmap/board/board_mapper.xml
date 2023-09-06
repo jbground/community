@@ -5,5 +5,19 @@
     <select id="selectAllBoardList" resultType="com.jbground.community.model.Board">
         SELECT * FROM BOARD
     </select>
+    
+    <select id="selectBoardList" resultType="com.jbground.community.model.Board">
+        SELECT 
+        	SEQ
+        	, TITLE
+        	, EDITOR
+        	, CONTENT
+        	, FORMATDATETIME(EDIT_TIME, 'yyyy-MM-dd')  AS EDIT_TIME
+        	, FORMATDATETIME(MODIFY_TIME, 'yyyy-MM-dd')  AS MODIFY_TIME
+       	FROM 
+       		BOARD
+       	ORDER BY
+       		EDIT_TIME DESC
+    </select>
 
 </mapper>

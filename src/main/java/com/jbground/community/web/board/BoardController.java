@@ -25,14 +25,17 @@ public class BoardController {
     @RequestMapping(value = "/board/list")
     public String showBoard(HttpServletRequest request, ModelMap model) throws Exception{
 
-        List<Board> allBoardList = boardService.getAllBoardList();
+        List<Board> boardList = boardService.getBoardList();
 
-        for (Board b : allBoardList) {
-
-            logger.info(b.toString());
-        }
+        model.addAttribute("boardList", boardList);
 
         return "thymeleaf/board/board_list";
+    } 
+    
+    @RequestMapping(value = "/board/view")
+    public String showBoardView(HttpServletRequest request, ModelMap model) throws Exception{
+
+        return "thymeleaf/board/board_view";
     } 
     
 }

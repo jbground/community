@@ -21,5 +21,9 @@ public class BoardService {
     public List<Board> getAllBoardList() throws Exception {
         return boardDao.getAllBoardList();
     }
+    
+    public List<Board> getBoardList() throws Exception {
+        return boardDao.getBoardList();
+    }
 
 }
