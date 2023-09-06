@@ -90,17 +90,17 @@
 	        <nav>
 	            <ul class="pagination" style="padding-top : 50px; margin: 0 auto;">
 	                <li>
-	                    <a href="#" aria-label="Previous">
+	                    <a th:href="@{/product/list(pageNo = ${page.prevPage})}" aria-label="Previous">
 	                        <span aria-hidden="true">&laquo;</span>
 	                    </a>
 	                </li>
-	                <li><a href="#" th:onclick="|location.href='@{/product/list(pageNo=${1})}'|"  th:text="1"></a></li>
-	                <li><a href="#" th:onclick="|location.href='@{/product/list(pageNo=${2})}'|" th:text="2"></a></li>
-	                <li><a href="#" th:onclick="|location.href='@{/product/list(pageNo=${3})}'|" th:text="3"></a></li>
-	                <li><a href="#" th:onclick="|location.href='@{/product/list(pageNo=${4})}'|" th:text="4"></a></li>
-	                <li><a href="#" th:onclick="|location.href='@{/product/list(pageNo=${5})}'|" th:text="5"></a></li>
+                    <li>
+                        <th:block th:each="item : ${#numbers.sequence(page.startPage,page.endPage)}">
+                            <a th:href="@{/product/list(pageNo = ${item})}" th:text="${item}"></a>
+                        </th:block>
+                    </li>
 	                <li>
-	                    <a href="#" aria-label="Next">
+	                    <a th:href="@{/product/list(pageNo = ${page.nextPage})}" aria-label="Next">
 	                        <span aria-hidden="true">&raquo;</span>
 	                    </a>
 	                </li>
