@@ -7,9 +7,8 @@
     <title>게시판 상세 페이지</title>
   </head>
   <body>
-
     <!-- header start -->
-    <div th:replace="~{thymeleaf/header :: headerFragment}"></div>	
+    <div th:replace="~{thymeleaf/header :: headerFragment}"></div>
     <!-- header end -->
 
     <main id="main">
@@ -39,7 +38,7 @@
                     <tr class="textContent">
                       <th scope="row">내용</th>
                       <td colspan="3">
-                        <input type="text" />
+                        <textarea name="" id="" cols="30" rows="10"></textarea>
                       </td>
                     </tr>
                   </tbody>
@@ -59,7 +58,7 @@
     </main>
 
     <!-- Footer start -->
-	<div th:replace="~{thymeleaf/footer :: footerFragment}"></div>	
-	<!-- Footer end -->	
+    <div th:replace="~{thymeleaf/footer :: footerFragment}"></div>
+    <!-- Footer end -->
   </body>
 </html>
