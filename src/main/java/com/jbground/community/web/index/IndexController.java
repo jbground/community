@@ -1,13 +1,13 @@
 package com.jbground.community.web.index;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  * 메인화면
@@ -18,14 +18,13 @@ public class IndexController {
 
     private final static Logger logger = LoggerFactory.getLogger(IndexController.class);
 
-
-
     @RequestMapping(value = "/main")
-    public String index(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception {
+    public String index(HttpServletRequest request, ModelMap model) throws Exception {
 
+    	HttpSession session = request.getSession();
 
-    	model.addAttribute("member", session.getAttribute("member"));
-
+    	model.addAttribute("member",  session.getAttribute("member"));
+    	
         return "thymeleaf/index";
     }
 
