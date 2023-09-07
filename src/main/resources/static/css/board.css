@@ -1,3 +1,7 @@
+.boardWrap .tblayout {
+  table-layout: fixed;
+}
+
 .boardWrap table th {
   text-align: center;
 }
@@ -6,6 +10,7 @@
 }
 .boardWrap table tr {
   border-top: solid 1px #fafafa !important;
+  height: 30px;
 }
 .boardWrap table tr:last-child {
   border-bottom: solid 1px #fafafa;
@@ -25,14 +30,9 @@
   font-size: 12px;
   background-color: #fc8b6e;
 }
-.boardWrap .btnBox .btnleft {
-  display: flex;
-  gap: 9px;
+.boardWrap .btnBox .btnleft button:nth-child(2) {
+  margin-left: 6px;
 }
-
-.boardWrap.boardView table td {
-}
-
 .boardWrap.boardView table td {
   text-align: left;
   padding: 10px 8px;
@@ -55,19 +55,25 @@
   width: 100%;
   height: 38px;
   font-size: 15px !important;
+  padding: 4px;
 }
-.boardWrap.boardView table input:focus {
+.boardWrap.boardView table input:focus,
+.boardWrap.boardView table textarea:focus {
   outline: none;
 }
-.boardWrap.boardView .textContent {
-  height: 300px;
-}
+
 .boardWrap.boardView .textContent th {
   vertical-align: middle;
 }
 .boardWrap.boardView .textContent td {
-  /* text-align: */
+  height: 300px;
+  width: 100%;
 }
-.boardWrap.boardView .textContent input {
-  height: 280px !important;
+.boardWrap.boardView .textContent textarea {
+  height: 100%;
+  width: 100%;
+  resize: none;
+  font-size: 15px;
+  line-height: 1.5rem;
+  padding: 5px;
 }

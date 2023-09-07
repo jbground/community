@@ -13,48 +13,43 @@
     <script src="/assets/js/util.js"></script>
     <script src="/assets/js/main.js"></script>
     <script type="text/javascript">
-	    $(document).ready(function(){
+      $(document).ready(function () {
+        // 전체 선택 , 전체 해제 기능
+        $("#chkAll").click(function () {
+          console.log("클릭");
+          if ($("#chkAll").is(":checked")) {
+            $("input[name=chk]").prop("checked", true);
+          } else {
+            $("input[name=chk]").prop("checked", false);
+          }
+        });
 
-	    	// 전체 선택 , 전체 해제 기능
-	    	$("#chkAll").click(function(){
-	    		console.log("클릭");
-	    		if($("#chkAll").is(":checked")){
-	    			$("input[name=chk]").prop("checked",true);
-	    		} else{
-	    			$("input[name=chk]").prop("checked",false);
-	    		}   		
-	    	});
-	    	
-	    	// 체크박스 전체 체크 후 하나의 리스트 체크 해제 시  전체 체크 해제
-	    	$("input[name=chk]").click(function(){
-	    		var totalArr = $("input[name=chk]").length;
-	    		var checked = $("input[name=chk]:checked").length;
-	    		
-	    		if(totalArr != checked){
-	    			$("#chkAll").prop("checked", false);
-	    		} else {
-	    			$("#chkAll").prop("checked", true);
-	    		}
-	    	});
-	    	
-	    	
-	    });
-	    
-	 // 게시판 글 삭제 
-   	 function deleteClick(){
-    	
-           var cnt = $("input[name='chk']:checked").length;
-           var arr = new Array();
-           $("input[name='chk']:checked").each(function() {
-               arr.push($(this).attr('value'));
-           });
-           
-           console.log(arr);
-           if(cnt == 0){
-               alert("삭제 할 항목을 선택 해주세요.");
-           }
-           else{
-                /* $.ajax = {
+        // 체크박스 전체 체크 후 하나의 리스트 체크 해제 시  전체 체크 해제
+        $("input[name=chk]").click(function () {
+          var totalArr = $("input[name=chk]").length;
+          var checked = $("input[name=chk]:checked").length;
+
+          if (totalArr != checked) {
+            $("#chkAll").prop("checked", false);
+          } else {
+            $("#chkAll").prop("checked", true);
+          }
+        });
+      });
+
+      // 게시판 글 삭제
+      function deleteClick() {
+        var cnt = $("input[name='chk']:checked").length;
+        var arr = new Array();
+        $("input[name='chk']:checked").each(function () {
+          arr.push($(this).attr("value"));
+        });
+
+        console.log(arr);
+        if (cnt == 0) {
+          alert("삭제 할 항목을 선택 해주세요.");
+        } else {
+          /* $.ajax = {
                    type: "DELETE"
                    url: "/board/arr"
                    dataType:"json",
@@ -68,21 +63,18 @@
                    },
                    error: function(){alert("서버통신 오류");}
                };  */
-           }
-       }
-	 
-	 // 게시판 글 수정
-	 function modifyClick(){
-		 alert("로그인 시 이용 가능합니다.");
-	 }
-    	
-  
+        }
+      }
+
+      // 게시판 글 수정
+      function modifyClick() {
+        alert("로그인 시 이용 가능합니다.");
+      }
     </script>
-   
   </head>
   <body>
     <!-- header start -->
-    <div th:replace="~{thymeleaf/header :: headerFragment}"></div>	
+    <div th:replace="~{thymeleaf/header :: headerFragment}"></div>
     <!-- header end -->
 
     <main id="main">
@@ -93,19 +85,21 @@
             <!-- 서브 컨텐츠 들어가는 부분 -->
             <div class="subcontent">
               <div class="boardWrap">
-                <table style="width: 100%">
-                <colgroup> 
-				   <col width="5%" /> 
-				   <col width="10%" /> 
-				   <col width="15%" />
-				   <col width="25%" /> 
-				   <col width="15%" /> 
-				   <col width="15%" />
-				   <col width="15%" />
-                </colgroup>
+                <table class="tblayout">
+                  <colgroup>
+                    <col width="70px" />
+                    <col width="70px" />
+                    <col width="200px" />
+                    <col width="auto" />
+                    <col width="150px" />
+                    <col width="150px" />
+                    <col width="150px" />
+                  </colgroup>
                   <thead>
                     <tr>
-                      <th><input type="checkbox" name="chkAll" id="chkAll"/></th>
+                      <th>
+                        <input type="checkbox" name="chkAll" id="chkAll" />
+                      </th>
                       <th>번호</th>
                       <th>제목</th>
                       <th>내용</th>
@@ -115,36 +109,50 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr th:each="item : ${boardList}"> 
+                    <tr th:each="item : ${boardList}">
                       <td>
-                        <input type="checkbox" name="chk" th:value="${item.seq}"/>
+                        <input
+                          type="checkbox"
+                          name="chk"
+                          th:value="${item.seq}"
+                        />
                       </td>
                       <td th:text="${item.seq}">1</td>
-                      <td class="oneLine" th:text="${item.title}">제목입니다.</td>
-                      <td th:text="${item.content}">내용입니다 내용입니다 내용입니다 내용입니다 내용입니다 내용입니다 ...</td>
+                      <td class="oneLine" th:text="${item.title}">
+                        제목입니다.
+                      </td>
+                      <td class="oneLine" th:text="${item.content}">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing
+                        elit. Ipsam blanditiis error ratione, eaque aliquid
+                        saepe repellendus earum, mollitia amet dignissimos
+                        facere! Doloremque molestias quasi sit, voluptatibus nam
+                        laborum ad vitae!
+                      </td>
                       <td th:text="${item.editor}">관리자</td>
                       <td th:text="${item.edit_time}">23-09-05</td>
                       <td th:text="${item.modify_time}">23-09-08</td>
-                    </tr>  
+                    </tr>
                   </tbody>
                 </table>
                 <div class="btnBox">
                   <div class="btnleft">
                     <button onclick="deleteClick();">삭제</button>
                     <th:block th:if="${member == null}">
-                    	<button onclick="modifyClick()">수정</button>
+                      <button onclick="modifyClick()">수정</button>
                     </th:block>
                     <th:block th:unless="${member == null}">
-                    	<button onclick="">수정</button>
+                      <button onclick="">수정</button>
                     </th:block>
                   </div>
                   <div class="btnRight">
-                  <th:block th:if="${member == null}">
-               		<button onClick="location.href='/login'">글쓰기</button>
-                  </th:block>
-                  <th:block th:unless="${member == null}">
-					<button onClick="location.href='/board/view'">글쓰기</button>
-				  </th:block>
+                    <th:block th:if="${member == null}">
+                      <button onClick="location.href='/login'">글쓰기</button>
+                    </th:block>
+                    <th:block th:unless="${member == null}">
+                      <button onClick="location.href='/board/view'">
+                        글쓰기
+                      </button>
+                    </th:block>
                   </div>
                 </div>
               </div>
@@ -155,7 +163,7 @@
     </main>
 
     <!-- Footer start -->
-	<div th:replace="~{thymeleaf/footer :: footerFragment}"></div>	
-	<!-- Footer end -->	
+    <div th:replace="~{thymeleaf/footer :: footerFragment}"></div>
+    <!-- Footer end -->
   </body>
 </html>
