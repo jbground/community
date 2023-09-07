@@ -177,3 +177,7 @@ body {
 .wrapperSign .social-links div:active {
   box-shadow: inset 1px 1px 2px #babebc, inset -1px -1px 2px #fff;
 } */
+
+.login #footer-wrapper {
+  margin-top: 500px !important;
+}
