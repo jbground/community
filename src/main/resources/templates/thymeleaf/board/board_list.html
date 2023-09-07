@@ -145,13 +145,11 @@
                     </th:block>
                   </div>
                   <div class="btnRight">
-                    <th:block th:if="${member == null}">
+                    <th:block th:if="${result == false}">
                       <button onClick="location.href='/login'">글쓰기</button>
                     </th:block>
-                    <th:block th:unless="${member == null}">
-                      <button onClick="location.href='/board/view'">
-                        글쓰기
-                      </button>
+                    <th:block th:unless="${result == false}">
+                      <button onClick="location.href='/board/view'">글쓰기</button>
                     </th:block>
                   </div>
                 </div>

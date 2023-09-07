@@ -1,5 +1,6 @@
 package com.jbground.community.web.index;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,13 +19,21 @@ public class IndexController {
 
     private final static Logger logger = LoggerFactory.getLogger(IndexController.class);
 
+    @Resource(type = IndexService.class)
+    private IndexService indexService;
+    
     @RequestMapping(value = "/main")
     public String index(HttpServletRequest request, ModelMap model) throws Exception {
 
     	HttpSession session = request.getSession();
 
-    	model.addAttribute("member",  session.getAttribute("member"));
+    	boolean result = indexService.checkLogin(session);
     	
+    
+    	// 로그인, 로그아웃 버튼 
+    	model.addAttribute("result", result);
+
+	
         return "thymeleaf/index";
     }
 

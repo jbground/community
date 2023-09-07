@@ -44,12 +44,8 @@ public class RestAccountController {
     @ResponseBody
     @RequestMapping(value = "/check/login", method = RequestMethod.POST)
     public ResponseStatus checkLogin(HttpServletRequest request, ModelMap model, @ModelAttribute Member member, HttpSession session) throws Exception {
-    	
-    	String msg = "";    
 
-    	ResponseStatus status = new ResponseStatus(0, msg);
-
-    	status = accountService.checkLogin(member);
+    	ResponseStatus status = accountService.checkLogin(member);
 
     	if(status.getStatus() == 1) {
     		session.setAttribute("member", member);
@@ -97,12 +93,7 @@ public class RestAccountController {
      */
     @ResponseBody
     @RequestMapping(value = "/members", method = RequestMethod.POST)
-    public ResponseStatus insertMember(HttpServletRequest request, @ModelAttribute Member member, @ModelAttribute Address address) throws Exception {
-    	    	
-    	String msg = "";    
-    	
-    	ResponseStatus status = new ResponseStatus(0, msg);
-
+    public ResponseStatus insertMember(HttpServletRequest request, @ModelAttribute Member member, @ModelAttribute Address address) throws Exception {    	    	
 
     	int seq =  addressService.insertAddress(address);
 
@@ -111,7 +102,7 @@ public class RestAccountController {
     	}
 
     	
-    	status = accountService.insertMember(member);
+    	ResponseStatus status = accountService.insertMember(member);
     	
     	return status;
     }

@@ -42,10 +42,10 @@
         <!-- Nav -->
         <nav id="nav">
           <ul>
-            <th:block th:if="${member == null}">
+            <th:block th:if="${result == false}">
               <li class="current"><a href="/login">Sign in</a></li>
             </th:block>
-            <th:block th:unless="${member == null}">
+            <th:block th:unless="${result == false}">
               <li class="current" id="logout"><a href="#">Sign out</a></li>
             </th:block>
             <li>

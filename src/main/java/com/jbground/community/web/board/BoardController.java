@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jbground.community.model.Board;
 import com.jbground.community.model.Member;
+import com.jbground.community.web.index.IndexService;
 
 @Controller
 public class BoardController {
@@ -23,24 +24,35 @@ public class BoardController {
 
     @Resource(type = BoardService.class)
     private BoardService boardService;
-
+    
+    @Resource(type = IndexService.class)
+    private IndexService indexService;
 
     @RequestMapping(value = "/board/list")
-    public String showBoard(HttpServletRequest request, ModelMap model, @ModelAttribute Member member, HttpSession session) throws Exception{
+    public String showBoard(HttpServletRequest request, ModelMap model,HttpSession session) throws Exception{
     	
         List<Board> boardList = boardService.getBoardList();
 
         model.addAttribute("boardList", boardList);
-        model.addAttribute("member", session.getAttribute("member"));
+        
+        boolean result = indexService.checkLogin(session);
+        
+        // 로그인, 로그아웃 버튼 
+    	model.addAttribute("result", result);
 
         return "thymeleaf/board/board_list";
     } 
     
     @RequestMapping(value = "/board/view")
-    public String showBoardView(HttpServletRequest request, ModelMap model, HttpSession session, @ModelAttribute Member member) throws Exception{
-
+    public String showBoardView(HttpServletRequest request, ModelMap model, HttpSession session) throws Exception{
+    	
+    	boolean result = indexService.checkLogin(session);
+         
+         // 로그인, 로그아웃 버튼 
+     	model.addAttribute("result", result);
+    	
     	model.addAttribute("member", session.getAttribute("member"));
- 
+
         return "thymeleaf/board/board_view";
     } 
     
