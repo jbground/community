@@ -1,194 +1,220 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head>
     <head>
-        <title>Product</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="/assets/css/main.css" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-        <script src="/assets/js/jquery.min.js"></script>
-        <script src="/assets/js/jquery.dropotron.min.js"></script>
-        <script src="/assets/js/browser.min.js"></script>
-        <script src="/assets/js/breakpoints.min.js"></script>
-        <script src="/assets/js/util.js"></script>
-        <script src="/assets/js/main.js"></script>
-        <script>
-            $(function (){
-                renderPagination(0);
-            });
+      <title>Product</title>
+      <meta charset="utf-8" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, user-scalable=no"
+      />
+      <link rel="stylesheet" href="/assets/css/main.css" />
+      <link rel="stylesheet" href="/css/product.css" />
+      <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
+      />
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+      <script src="/assets/js/jquery.min.js"></script>
+      <script src="/assets/js/jquery.dropotron.min.js"></script>
+      <script src="/assets/js/browser.min.js"></script>
+      <script src="/assets/js/breakpoints.min.js"></script>
+      <script src="/assets/js/util.js"></script>
+      <script src="/assets/js/main.js"></script>
+      <script>
+        $(function () {
+          renderPagination(0);
+        });
 
-            function renderPagination(currentPage) {
+        function renderPagination(currentPage) {
+          $.ajax({
+            url: "/product/pagination",
+            type: "get",
+            dataType: "json",
+            contentType: "application/json;charset=UTF-8",
+            data: { pageNo: currentPage },
+            success: function (success) {
+              console.log(success);
+              console.log(success.empty);
+              console.log(success.totalPages);
+              console.log(success.totalElements);
+              console.log(success.number);
 
-                $.ajax({
-                    url : '/product/pagination',
-                    type : 'get',
-                    dataType : 'json',
-                    contentType : 'application/json;charset=UTF-8',
-                    data : {'pageNo' : currentPage} ,
-                    success : function (success){
-                        console.log(success);
-                        console.log(success.empty);
-                        console.log(success.totalPages);
-                        console.log(success.totalElements);
-                        console.log(success.number);
+              //기존 row element 밑에 있는 자식 노드 모두 삭제
+              const parent = document.getElementById("row");
+              while (parent.firstChild) {
+                parent.firstChild.remove();
+              }
 
-                        //기존 row element 밑에 있는 자식 노드 모두 삭제
-                        const parent = document.getElementById('row');
-                        while (parent.firstChild) {
-                            parent.firstChild.remove();
-                        }
+              //새로운 자식노드를 추가하기 위한 fragment 생성
+              const fragment = document.createDocumentFragment();
+              for (let i = 0; i < success.content.length; i++) {
+                var box_div = document.createElement("div");
+                box_div.className = "col-4 col-12-medium";
 
-                        //새로운 자식노드를 추가하기 위한 fragment 생성
-                        const fragment = document.createDocumentFragment();
-                        for(let i = 0 ; i <success.content.length ; i ++){
+                var section = document.createElement("section");
+                section.className = "box feature";
+                box_div.appendChild(section);
 
-                            var box_div = document.createElement('div');
-                            box_div.className = 'col-4 col-12-medium';
+                var image = document.createElement("a");
+                image.className = "image featured";
+                image.href = "#";
+                image.insertAdjacentHTML(
+                  "beforeend",
+                  `<img src='/images/sample.png' alt=''>`
+                );
+                section.appendChild(image);
 
+                var inner_div = document.createElement("div");
+                inner_div.className = "inner";
+                var inner_header = document.createElement("header");
 
-                            var section = document.createElement('section');
-                            section.className = 'box feature';
-                            box_div.appendChild(section);
+                var inner_h2 = document.createElement("h2");
+                inner_h2.innerText = success.content[i].title;
+                inner_div.appendChild(inner_h2);
+                var inner_p = document.createElement("p");
+                inner_p.innerText = success.content[i].desc;
+                inner_div.appendChild(inner_p);
 
-                            var image = document.createElement('a');
-                            image.className = 'image featured';
-                            image.href = '#';
-                            image.insertAdjacentHTML("beforeend", `<img src='/images/sample.png' alt=''>`);
-                            section.appendChild(image);
+                inner_div.appendChild(inner_header);
 
-                            var inner_div = document.createElement('div');
-                            inner_div.className = 'inner';
-                            var inner_header = document.createElement('header');
+                var inner_price = document.createElement("p");
+                inner_price.innerText = "가격 : " + success.content[i].price;
+                inner_div.appendChild(inner_price);
+                var inner_stock = document.createElement("p");
+                inner_stock.innerText = "수량 : " + success.content[i].stock;
+                inner_div.appendChild(inner_stock);
+                section.appendChild(inner_div);
 
-                            var inner_h2 = document.createElement('h2');
-                            inner_h2.innerText = success.content[i].title;
-                            inner_div.appendChild(inner_h2);
-                            var inner_p = document.createElement('p');
-                            inner_p.innerText = success.content[i].desc;
-                            inner_div.appendChild(inner_p);
+                fragment.appendChild(box_div);
+              }
 
-                            inner_div.appendChild(inner_header);
+              document.getElementById("row").appendChild(fragment);
 
-                            var inner_price = document.createElement('p');
-                            inner_price.innerText = '가격 : ' + success.content[i].price;
-                            inner_div.appendChild(inner_price);
-                            var inner_stock = document.createElement('p');
-                            inner_stock.innerText = '수량 : ' + success.content[i].stock;
-                            inner_div.appendChild(inner_stock);
-                            section.appendChild(inner_div);
+              //페이지네이션 항목 자동 생성
+              var prev = success.number - 1 <= 0 ? 0 : success.number - 1;
+              var next =
+                success.number + 1 >= success.totalPages - 1
+                  ? success.totalPages - 1
+                  : success.number + 1;
 
-                            fragment.appendChild(box_div);
+              const fragmentPage = document.getElementById("pagination");
+              while (fragmentPage.firstChild) {
+                fragmentPage.firstChild.remove();
+              }
 
-                        }
+              fragmentPage.insertAdjacentHTML(
+                "beforeend",
+                `<a href='javascript:renderPagination(0);' class="first" id='first'>&lt;&lt;</a>`
+              );
+              fragmentPage.insertAdjacentHTML(
+                "beforeend",
+                `<a href='javascript:renderPagination(${prev});' class="prev" id='prev'>&lt;</a>`
+              );
 
-                        document.getElementById('row').appendChild(fragment);
+              for (var i = 0; i < success.totalPages; i++) {
+                if (success.number === i) {
+                  fragmentPage.insertAdjacentHTML(
+                    "beforeend",
+                    `<a href='javascript:renderPagination(${i});' class="current" data-num='${i}'>${
+                      i + 1
+                    }</a>`
+                  );
+                } else {
+                  fragmentPage.insertAdjacentHTML(
+                    "beforeend",
+                    `<a href='javascript:renderPagination(${i});' class="num" data-num='${i}'>${
+                      i + 1
+                    }</a>`
+                  );
+                }
+              }
 
-                        //페이지네이션 항목 자동 생성
-                        var prev = success.number-1 <= 0 ? 0 : success.number-1;
-                        var next = success.number+1 >= success.totalPages-1 ? success.totalPages-1 : success.number+1;
+              fragmentPage.insertAdjacentHTML(
+                "beforeend",
+                `<a href='javascript:renderPagination(${next});' class="next" id='next'>&gt;</a>`
+              );
+              fragmentPage.insertAdjacentHTML(
+                "beforeend",
+                `<a href='javascript:renderPagination(${
+                  success.totalPages - 1
+                });' class="last" id='last'>&gt;&gt;</a>`
+              );
+            },
+            error: function (data, status, err) {},
+          });
 
-                        const fragmentPage = document.getElementById('pagination');
-                        while (fragmentPage.firstChild) {
-                            fragmentPage.firstChild.remove();
-                        }
-
-                        fragmentPage.insertAdjacentHTML("beforeend", `<a href='javascript:renderPagination(0);' class="first" id='first'>&lt;&lt;</a>`);
-                        fragmentPage.insertAdjacentHTML("beforeend", `<a href='javascript:renderPagination(${prev});' class="prev" id='prev'>&lt;</a>`);
-
-                        for (var i = 0; i < success.totalPages; i++) {
-                            if(success.number === i){
-                                fragmentPage.insertAdjacentHTML("beforeend", `<a href='javascript:renderPagination(${i});' class="current" data-num='${i}'>${i+1}</a>`);
-                            }else{
-                                fragmentPage.insertAdjacentHTML("beforeend", `<a href='javascript:renderPagination(${i});' class="num" data-num='${i}'>${i+1}</a>`);
-                            }
-
-                        }
-
-                        fragmentPage.insertAdjacentHTML("beforeend", `<a href='javascript:renderPagination(${next});' class="next" id='next'>&gt;</a>`);
-                        fragmentPage.insertAdjacentHTML("beforeend", `<a href='javascript:renderPagination(${success.totalPages-1});' class="last" id='last'>&gt;&gt;</a>`);
-
-
-                    },
-                    error: function (data, status, err) {
-
-                    }
-                });
-
-
-
-                // 페이지 목록 생성
-            }
-        </script>
+          // 페이지 목록 생성
+        }
+      </script>
     </head>
-</head>
-<body class="is-preload homepage">
+  </head>
+  <body class="is-preload homepage">
     <div id="page-wrapper">
+      <div id="header-wrapper">
+        <header id="header" class="container">
+          <!-- Logo -->
+          <div id="logo">
+            <h1><a href="/main">Jbground</a></h1>
+            <span>by HTML5 UP</span>
+          </div>
 
-		
-        <div id="header-wrapper">
-            <header id="header" class="container">
-
-                <!-- Logo -->
-                <div id="logo">
-                    <h1><a href="/main">Jbground</a></h1>
-                    <span>by HTML5 UP</span>
-                </div>
-
-                <!-- Nav -->
-                <nav id="nav">
+          <!-- Nav -->
+          <nav id="nav">
+            <ul>
+              <li class="current"><a href="index.html">Welcome</a></li>
+              <li>
+                <a href="/product/list">Product</a>
+                <ul>
+                  <li><a href="#">Lorem ipsum dolor</a></li>
+                  <li><a href="#">Magna phasellus</a></li>
+                  <li>
+                    <a href="#">Phasellus consequat</a>
                     <ul>
-                        <li class="current"><a href="index.html">Welcome</a></li>
-                        <li>
-                            <a href="/product/list">Product</a>
-                            <ul>
-                                <li><a href="#">Lorem ipsum dolor</a></li>
-                                <li><a href="#">Magna phasellus</a></li>
-                                <li>
-                                    <a href="#">Phasellus consequat</a>
-                                    <ul>
-                                        <li><a href="#">Lorem ipsum dolor</a></li>
-                                        <li><a href="#">Phasellus consequat</a></li>
-                                        <li><a href="#">Magna phasellus</a></li>
-                                        <li><a href="#">Etiam dolore nisl</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Veroeros feugiat</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="left-sidebar.html">Left Sidebar</a></li>
-                        <li><a href="right-sidebar.html">Right Sidebar</a></li>
-                        <li><a href="no-sidebar.html">No Sidebar</a></li>
+                      <li><a href="#">Lorem ipsum dolor</a></li>
+                      <li><a href="#">Phasellus consequat</a></li>
+                      <li><a href="#">Magna phasellus</a></li>
+                      <li><a href="#">Etiam dolore nisl</a></li>
                     </ul>
-                </nav>
-
-            </header>
-        </div>
+                  </li>
+                  <li><a href="#">Veroeros feugiat</a></li>
+                </ul>
+              </li>
+              <li><a href="left-sidebar.html">Left Sidebar</a></li>
+              <li><a href="right-sidebar.html">Right Sidebar</a></li>
+              <li><a href="no-sidebar.html">No Sidebar</a></li>
+            </ul>
+          </nav>
+        </header>
+      </div>
     </div>
-	
+
     <div id="features-wrapper">
-        <div class="container">
-            <div id="row" class="row">
-                <div class="col-4 col-12-medium">
-                    <!-- Box -->
-                    <section class="box feature">
-                        <a href="#" class="image featured"><img src="/images/sample.png" alt="" /></a>
-                        <div class="inner">
-                            <header>
-                                <h2>상품1</h2>
-                                <p>상품설명</p>
-                            </header>
-                            <p>가격 : 40,000원</p>
-                            <p>수량 : 4</p>
-                        </div>
-                    </section>
-                </div>
-            </div>
+      <div class="container">
+        <div id="row" class="row">
+          <div class="col-4 col-12-medium">
+            <!-- Box -->
+            <section class="box feature">
+              <a href="#" class="image featured"
+                ><img src="/images/sample.png" alt=""
+              /></a>
+              <div class="inner">
+                <header>
+                  <h2>상품1</h2>
+                  <p>상품설명</p>
+                </header>
+                <p>가격 : 40,000원</p>
+                <p>수량 : 4</p>
+              </div>
+            </section>
+          </div>
         </div>
-        <div id="pagination">
-        </div>
+      </div>
+      <div id="pagination"></div>
     </div>
-
-</body>
+  </body>
 </html>
